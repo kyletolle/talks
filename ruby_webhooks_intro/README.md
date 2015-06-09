@@ -13,3 +13,6 @@ presentation](https://kyletolle.github.io/ruby_webhooks_intro/) online. The
 code is also available at
 [ruby_webhooks_intro](https://github.com/kyletolle/ruby_webhooks_intro).
 
+The images referenced in the Markdown actually live in the presentation repo,
+so those images aren't in here.
+
