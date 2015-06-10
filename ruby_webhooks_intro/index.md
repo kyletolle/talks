@@ -250,7 +250,7 @@ Real-Time™ data.
 
 ### We already have an API
 
-- It exsits
+- It exists
 - It works
 ------
 
