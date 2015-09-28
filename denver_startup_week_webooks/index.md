@@ -1,5 +1,32 @@
-# The Power Behind Real-Time Push Notifications Using Webhooks
+![](dsw_title_1.png)
+___
+Thank you for joining us for this Denver Startup Week session.
+------
 
+
+![](dsw_title_2.png)
+___
+Denver Startup Week is the largest free entrepreneurial event of its kind in
+North America.
+------
+
+
+![](dsw_title_3.png)
+___
+This session is part of the Developer Track, sponsored by Pivotal Labs, one of
+six programming tracks aimed at the entire entrepreneurial team.
+------
+
+
+## Please share your experiece
+
+at this session online using
+
+## #DENStartupWeek
+------
+
+
+# The Power Behind Real-Time Push Notifications Using Webhooks
 ------
 
 
@@ -14,7 +41,6 @@ Software Engineer at [Spatial Networks](http://spatialhetworks.com)
 
 Implemented webhooks in [Fulcrum](http://fulcrumapp.com), our mobile data
 collection service
-
 ___
 Ours have been in operation for about a year and a half. I wanted to share
 what I've learned. Maybe you'll find it useful or interesting. And I would
@@ -32,21 +58,21 @@ Ask questions at any time!
 
 ### Presentation:
 
-TODO: Update this link...
-[https://kyletolle.github.io/ruby_webhooks_intro](https://kyletolle.github.io/ruby_webhooks_intro)
+[https://kyletolle.github.io/dsw_webhooks_talk](https://kyletolle.github.io/dsw_webhooks_talk)
 
 ### Code:
 
-TODO: Update this link
-[https://github.com/kyletolle/ruby_webhooks_intro](https://github.com/kyletolle/ruby_webhooks_intro)
+[https://github.com/kyletolle/dsw_webhooks_talk](https://github.com/kyletolle/dsw_webhooks_talk)
 ------
- 
 
-# Getting a Feel
 
-- How many have some knowledge of webhooks?
-- How many have used them before?
-- How many work where webhooks are offered?
+# Getting a feel
+
+How many of you
+
+- have some knowledge of webhooks?
+- have used webhooks before?
+- offer webhooks at your company?
 ___
 Trying to get a feel for the familiarity that people have with the topic.
 ------
@@ -54,13 +80,12 @@ Trying to get a feel for the familiarity that people have with the topic.
 
 # Overview
 
-TODO: Add some more stuff to this overview... Particularly the discussion
-about startups in general.
-
+- Why flexibility is good for startups
 - How clients use APIs
 - Why webhooks are a thing
 - Barebones webhooks demo
 - Webhooks integration demo
+- Other use cases for webhooks
 - Other things we can do
 - Recapping and wrapping up
 ------
@@ -72,6 +97,9 @@ Government Agency for Bear Attacks
 ___
 This fictional organization will help make things a little more concrete.
 Explain how they'll use Fulcrum.
+People in the office will specify what kind of data they want to collect about
+bear attacks. People in the office, like forest rangers, will be the ones
+collecting the data about the bear attacks.
 ------
 
 ### Vicious
@@ -108,64 +136,105 @@ we need some background
 what we know
 ------
 
-TODO: This is where we want to begin talking about startups.
-
-------
-
 # Startups
 
-TODO: This is going to be a big section as I test things out.
+Staying small, focused, and agile
 
-Startups find a niche.
-They don't build a whole ecosystem.
-They solve one problem, do it well.
-Don't want to dilute your core product with extra junk.
-Staying focused gives you differentiation. You're not cluttered.
-Your value proposition is more clear.
-
-Want to give your customers access to their data.
-This lets you fit into their workflow.
-Incumbents might force people to adapt to their workflow.
-But startups are like a link in a chain that helps people be nimble.
-Avoid vendor lock-in too. Builds goodwill. Makes more sense for your user too.
-They can combine your focused product with other focused products.
-They can adapt your product to their workflow, to their needs.
-This is real value here. When you enable them to get more stuff done.
-
-Flexibility is your power. Small is nimble. Small is agile. Small is focused.
-Flexibility isn't something that the incumbents really have.
-
-Some kinds of integration make sense to build.
-But a general way to integrate with others is powerful.
-You don't have to write custom integrations for everything.
-You don't have to predict everything your customers will want or need.
-You give your customers more power to do things that you could never actually
-think of, because you're not in their shoes trying to solve their problems.
-You'll have more flexibility going forward to integrate with more things that
-didn't even exist when you first started.
-You'll be able to integrate with many 3rd parties for essentially free.
-Make it so your users can understand it and use it, and you're off.
-Or you can help your customers do stuff, but the flexible nature will mean
-it's less work for you and for them. That's a huge win.
-You can't hardcode everything. You don't want to. Spread your resources out.
-Pain to maintain. You want to stay focused.
-The flexible approach maintains your relevancy going forward. You're not
-hardcoding integration with service du jour, which will fall out of favor in a
-week. You're giving the flexibility to integrate with many more things.
-You don't have to start over when some new service shows up on the block.
-The startup has to fit into the puzzle that is the customer's workflow.
-
-How do we do that? APIs are a great way. Very flexible.
-
-Then discuss the whole thing about the APIs like below.
-
-And webhooks are another great way to expand that flexible, open approach.
-
-TODO: How to sell it to your managers. Need to process that section and work
-it into the stuff above...
+makes your value clear
+___
+Have a niche. Solve one problem well.
+Don't build an entire ecosystem.
+Focus gives you differentiation. You're not cluttered.
+------
 
 
+## Importance of access
 
+Give customers easy access to their data
+
+Avoid vendor lock-in
+
+Build goodwill
+------
+
+
+## Flexibility is your power
+
+They fit you into their workflow
+
+More likely to use your service
+___
+When you don't dictate their workflow, they have an easier time adopting you
+to how they do things. This is good.
+They can fit your offering in with other services.
+They stay nimble, and can get more done.
+You're more valuable to them by being accessible.
+------
+
+
+## Hard-coded integration
+
+Integrating with specific services can make sense
+
+But you have to predict it
+
+And then maintain it
+___
+Can be powerful and valuable.
+More effort initially.
+Integrations are limited to what you have built.
+------
+
+
+## A single, general approach for integrations
+
+is even better for allowing many of them
+
+___
+You don't have to predict everything your customers might need.
+Don't write one-off code for each integration.
+Stay focused on your core offering.
+------
+
+
+## Flexible going forward
+
+Not hardcoding for the service-du-jour
+
+Integrate with other services that are relevant later
+___
+You'll be able to integrate more easily with services that don't even
+exist now. Lots of new things popping up every day.
+Adding these integrations will be easier and cheaper.
+------
+
+
+## Buying you relevancy
+
+You're giving customers the flexibility to do anything they want
+
+Better chance of fitting into their business and workflow over time
+
+Keeping your focus helps you own your niche
+___
+Only the customer really knows what they're trying to do and how to best do
+it.
+------
+
+
+## Document it well
+
+Make it easy for users to understand and get started with
+
+Document it so they can build their own integrations
+
+Also a good starting point if you do integration work for clients
+------
+
+
+## How do we do this?
+
+What general pattern are we already familiar with as web developers?
 ------
 
 
@@ -744,6 +813,195 @@ But these are for another talk!
 ------
 
 
+## How to Sell it to your manager
+## How to convey the business value
+
+TODO: How to sell it to your managers. Need to process that section and work
+it into the stuff above...
+
+##
+
+Customers don't mind paying for a service as long as they can get their data
+out
+
+They can pull it into their own DBs
+
+Run it through their own analysis.
+
+They can swap out their entire pipeline if they want, but they can still use
+webhooks here. That's awesome!
+
+##
+
+We've found it easy to get customers to adopt our service when they're
+replacing a link in their chain.
+
+We're not forcing them to rebuild their world.
+They can slot us in, without rearchitecting the world.
+
+They can design their workflow.
+
+##
+
+Although, because it's a general pattern, people have to implement the
+specifics.o
+
+Some effort they have to give.
+
+But things like Zapier make that a lot easier.
+
+##
+
+People don't even have to care about this at all initially
+
+But it's something we offer
+
+And as their use of our service grows, webhooks allows them to do more with
+our service.
+
+We give them the power to keep on growing and continue to use us.
+
+##
+
+Webhooks and Api are a good way to give them access to their data
+
+You're more plug-n-play
+
+## Foundation to build on
+
+Internal features could be built on this too.
+
+Use the notifications to kick off some other functionality.
+
+But you don't need to add it to the core of your system.
+
+Potential here for micro-services.
+
+## 
+
+Webhooks allow 2 applications to talk together easily
+
+One application listens for messages, and then does something with it
+
+Makes it easier to build integrations
+
+## How we use webhooks
+
+GeoBooze
+  - When people are enjoying a beverage, they can take a picture and then
+    upload the info about it, and that goes into slack. I think this is an
+    incoming webhook.
+
+Slack
+  - Support emails get put into slack
+  - Support tickets from tender get put into slack
+  - Support chats from intercom get put into slack
+  - Github commits, issues, and PRs get put into slack
+
+TODO: What about Slack Incoming/Outgoing webhooks? Look at the docs.
+
+------
+
+## How people use webhooks in Fulcrum
+
+To sync with an external database or service.
+Mirroring a table that exists in MySQL.
+Syncing data to CartoDB for visualization.
+Sending email notifications to manager when a new record is created and the
+status is "needs immediate attention."
+
+------
+
+## Use webhooks as a notification
+
+Our API serves up records JSON which needs to be cross referenced with the
+form JSON, which is the schema to understand it. (This is what makes fulcrum
+so flexible.) So you have to parse through it, which isn't fun to do for
+simple tasks.
+
+If you treat the webhook like a notification, then fetch the data from another
+endpoint which is more human readable, that's also a possibility. Makes it
+super easy to do certain things like update external databases this way.
+
+This is using webhooks with data shares.
+Explain data shares a little. Easy way to share your data with external people
+who don't need accounts. It's like a public, read-only feed of your data.
+
+Data shares are more easily consummable than the JSON from the API. Makes
+simple integrations easier to set up, since you don't have to parse the data
+schema and the data.
+
+------
+
+## Pushbullet for push notifications
+
+Someone in the office assigns a record
+That person who needs to do the work is texted a link
+The link is a deep link that opens fulcrum and prepopulates a new record with
+some information.
+
+Could do something like notify people within a certain geographic area. You
+could also assign the person who is known to be the closest.
+
+## Google App Scripts
+
+No server setup.
+
+Create a JS script, just like you would a Google Doc.
+
+Share it just like a google doc as well.
+___
+No heroku or setting up a PHP server.
+
+------
+
+## Webhooks as a Workflow
+
+When a record is submitted, you can use a webhook to fetch data from another
+web service (like weather information), and then use the API to update the
+record. Automatically fetch weather information, based on the location.
+
+Jason wrote a blog post about using the weather information. Bryan
+wants to do something like this for GeoBooze to add ABV data.
+
+Allows you to programattically add data from another service, based on
+whatever rules you want.
+------
+
+## Agnostic
+
+They can use PHP or Ruby or Node or Java or whatever they want.
+
+As long as it can read JSON.
+
+We're not writing custom libraries to support all different environments too
+------
+
+## Integration
+
+Our users can do all sorts of custom things. We can help them get set up, or
+they can do it themselves. But it's nice that it's a standard approach for
+each of these customers. The entire world isn't one-off.
+
+Lowers the barrier to integrations. They can read the docs and get started
+themselves.
+It's a force multiplier.
+
+We don't have a huge engineering team, so it allows us to have a greater
+impact.
+
+We don't need a developer to add stuff to our core product for these
+integrations.
+------
+
+
+
+
+
+------
+
+
+
 ## Webhooks Docs for Fulcrum
 
 - [http://fulcrumapp.com/guides/webhooks/webhooks-for-push-notifications/](http://fulcrumapp.com/guides/webhooks/webhooks-for-push-notifications/)
@@ -775,87 +1033,16 @@ webhooks to your project.
   - [https://github.com/kyletolle/random_number_texter](https://github.com/kyletolle/random_number_texter)
 - Script to create this presentation
   - [https://github.com/kyletolle/markdown_to_reveal](https://github.com/kyletolle/markdown_to_reveal)
+------
 
+
+## I'd love your Feedback
+___
+How did I do with my talk?
+How you'd use webhooks?
+Or thoughts on this topic in general.
 ------
 
 
 # Thanks!
-
-------
-
-## NEW TALK FOR DSW
-
-Webhooks talk @ Denver Startup Week
-
-# Intro
-
-- How many have heard of webhooks?
-- How many have used webhooks?
-- How many work for a company or service that implements webhooks?
-
-# Importance of Open
-
-Avoiding vendor lock-in is important for small businesses and startups. You
-haven't invented an entire ecosystem that you want to lock people into. And
-you'll want your customers to have access to their data. If they combine it
-with their own processes or some other sister services, then it's easier for
-you to find your niche, make things easier for them in one area, and provide
-them more value.
-
-In fact, you don't want to build the entire ecosystem and dilute your main
-offering. Staying focused when you're small gives you differentiation.
-
-Some kinds of integration with specific partners might make a lot of sense.
-But a general sort of way to integrate with others is even more powerful. If
-it's easy to use and a pattern others can follow or use, then we have the
-potential to integrate with many 3rd parties, essentially for free. We don't
-build a custom integration for each one, but they can all use a single
-approach.
-
-When you're going against a large incumbent, flexibility is going to be a huge
-advantage.
-
-If you're flexible with what you allow your customers to do, that's less
-custom integration you have to build yourself. Building a single type of
-integration gives you and your customers more flexibility than you could
-hard-code. And this is particularly important for maintaining relevancy going
-forward. You don't have to integrate with every new thing if the customers
-have a way to do this on their own. Think of your product as a link in a chain
-of their workflow and you understand how important it is ti give them the
-tools to work with other services. Startups are like pieces of the puzzle:
-small, focused, built for a particular use case and position. The startup has
-to fit into the puzzle or the rest of the ecosystem. API and webhooks are a
-good way to do that.
-
-Your internal stuff or features could be built on top of webhooks too. Might
-be one way to approach micro-services. Or new features that aren't in the
-core could be built on top of webhooks, and exposed in a seamless way.
-
----
-
-How to sell it to your managers. How to convey the business value.
-
-Rather than building a specific solution that's forcing them into our workflow, this allows people to fit us into their workflow. That's going to increase the chance of adoption of our service. Keeps us lightweight. People can swap out their backends easily, which is amazing. Customers don't mind paying for the service so long as they can get the data out. Webhooks and the API are a big way to do that.
-
-Webhooks allow you to design your own workflow. Instead of trying to shoehorn the workflow from the system you bought into. Although, the complete customization is that you have to build it. There's some effort people have to do. But stuff like Zapier helps makes that easier.
-
-We can focus on the niche, which is super good for us and for the customer. They can slot us in, without rearchitecting the world to use our service. And people don't have to use them right off the bat, but they have that option later. Which adds power.
-
-Webhooks allow 2 APIs to talk together a lot more easily. You intercept a message and then do something with it. Makes it easier to build integrations.
-
-In addition to Fulcrum, talk about how we use webhooks. Slack. Incoming and outgoing. Tender feeds into slack too. Outgoing sends a notification when something happens in slack, sends the data somewhere else. Incoming webhook is geobooze. Something gets done in another app and then posts a message in slack. Look at the docs for this.
-
-Primiarly in fulcrum, people use webhooks to sync with an external database or service. Mirroring a table that exists in MySQL. Syncing data to CartoDB. Sending email notifications when a new record is created, and the status is "needs immediate attention", an email can be sent to a manager.
-
-Push bullet has a good API for push notifications. Send a notification with a dispatch, clicking on the link, opens the record on the mobile device. When a record is assigned, send a link to who it was assigned to, and the URL can open up the app to that record. You could do something like notify people within a certain geo area. You could also assign to someone who was last known to be nearest.
-
-Using webhooks with data shares is also cool. Our JSON payload of the webhook is like the API format, which isn't so readable. You'd have to parse the data. But treat it as a notification, and then fetch through the data share and you can get some human-readable data to then chuck into a DB. The data is more easily consummable in the data share. And if you need something simple, where you just need a field or two, you can hardcode the values. It's not just pushing your data somewhere, you can do other things too.
-
-Bryan wanted to add to GeoBooze. When a new record is created without an ABV, then hit a web service to look it up and then update the record. Webhook makes a call to some other API and then you can write some data back to the API. Allows you to automatically enter some data from a service without manually doing it. You can automatically fetch the weather data from a service based on the location.
-
-We have an integration team, and they've found that this allows customers to do all sorts of custom things. We can help them get set up, which is worthwhile for us and for them. It's a force multiplier. We don't have a huge engineering team, so this allows us to have a lot more impact. Lowers the barrier to building these custom workflows. Allows us to more easily do things that we could have never predicted. We don't need a core developer to build some integration, someone else can use our webhooks to build on top of it. They can read the docs and build their own stuff.
-
-Keeps us flexible. We can build something more one off without adding to the core of our system. Can repurpose scripts to do other things. And they're programming language agnostic. PHP or Ruby or Node or whatever. As long as it can read JSON, you're able to use this. We're not writing custom libraries to support all different environments too.
-
-Google App Scripts too. This takes no server setup. Just create an app script like you would a google doc. No needing to use heroku or a PHP server. And you can share it too, like you would a google doc.
 
