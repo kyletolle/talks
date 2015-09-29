@@ -1,17 +1,17 @@
-![](dsw_title_1.png)
+![Denver Startup Week - Title Slide 1](dsw_title_1.png)
 ___
 Thank you for joining us for this Denver Startup Week session.
 ------
 
 
-![](dsw_title_2.png)
+![Denver Startup Week - Title Slide 2](dsw_title_2.png)
 ___
 Denver Startup Week is the largest free entrepreneurial event of its kind in
 North America.
 ------
 
 
-![](dsw_title_3.png)
+![Denver Startup Week - Title Slide 3](dsw_title_3.png)
 ___
 This session is part of the Developer Track, sponsored by Pivotal Labs, one of
 six programming tracks aimed at the entire entrepreneurial team.
@@ -50,7 +50,7 @@ love to get your feedback as well.
 
 # First off
 
-Ask questions at any time!
+## Ask questions at any time!
 ------
 
 
@@ -66,27 +66,25 @@ Ask questions at any time!
 ------
 
 
-# Getting a feel
-
-How many of you
+# How many of you
 
 - have some knowledge of webhooks?
 - have used webhooks before?
 - offer webhooks at your company?
 ___
-Trying to get a feel for the familiarity that people have with the topic.
+Trying to get a feel for what familiarity people have with the topic.
 ------
 
 
 # Overview
 
-- Why flexibility is good for startups
+- Flexibility and integrations
 - How clients use APIs
 - Why webhooks are a thing
 - Barebones webhooks demo
 - Webhooks integration demo
 - Other use cases for webhooks
-- Other things we can do
+- Demonstrate the value to your manager
 - Recapping and wrapping up
 ------
 
@@ -96,16 +94,21 @@ Trying to get a feel for the familiarity that people have with the topic.
 Government Agency for Bear Attacks
 ___
 This fictional organization will help make things a little more concrete.
-Explain how they'll use Fulcrum.
 People in the office will specify what kind of data they want to collect about
-bear attacks. People in the office, like forest rangers, will be the ones
+bear attacks. People in the field, like forest rangers, will be the ones
 collecting the data about the bear attacks.
 ------
+
+
+### Why bear attacks?
+------
+
 
 ### Vicious
 
 ![bear boxing attack](bear_boxing_attack.gif)
 ------
+
 
 ### Relentless
 
@@ -136,25 +139,18 @@ we need some background
 what we know
 ------
 
+
 # Startups
+------
 
-Staying small, focused, and agile
 
-makes your value clear
+## Staying small, focused, and agile
+
+### makes your value clear
 ___
 Have a niche. Solve one problem well.
 Don't build an entire ecosystem.
 Focus gives you differentiation. You're not cluttered.
-------
-
-
-## Importance of access
-
-Give customers easy access to their data
-
-Avoid vendor lock-in
-
-Build goodwill
 ------
 
 
@@ -164,35 +160,69 @@ They fit you into their workflow
 
 More likely to use your service
 ___
-When you don't dictate their workflow, they have an easier time adopting you
-to how they do things. This is good.
-They can fit your offering in with other services.
-They stay nimble, and can get more done.
-You're more valuable to them by being accessible.
+When you don't dictate your customer's workflow, they have an easier time
+adopting your service into how they do things.
+They can slot us in, without rearchitecting the world.
+This is good, and the incumbent likely doesn't have this flexibility.
 ------
 
 
-## Hard-coded integration
+What's this mean in practice?
 
-Integrating with specific services can make sense
+## Give clients _easy_ access to their data
+
+They can hook you up to other services
+___
+Customers don't mind paying as long as they can get their data out.
+You're more valuable to them by being accessible.
+They stay nimble, and can get more done.
+------
+
+
+This is a good way to
+
+## Avoid vendor lock-in
+
+&amp;
+
+## Build goodwill
+___
+Vendor lock-in makes companies lazy. If they can easily leave your service,
+you have to work harder to make it really worthwhile for them.
+But this will help you retain customers who are a good fit, and they'll love
+your service.
+------
+
+
+## How do you deliver this flexibility?
+------
+
+
+## Integrating with specific services
 
 But you have to predict it
 
 And then maintain it
 ___
+This is one option.
 Can be powerful and valuable.
 More effort initially.
 Integrations are limited to what you have built.
 ------
 
 
-## A single, general approach for integrations
+Instead, what about...
 
-is even better for allowing many of them
+## General patterns for integration
+------
 
+
+### These are even better for
+
+### allowing many of them
 ___
 You don't have to predict everything your customers might need.
-Don't write one-off code for each integration.
+Your integration capability isn't hardcoded.
 Stay focused on your core offering.
 ------
 
@@ -203,19 +233,17 @@ Not hardcoding for the service-du-jour
 
 Integrate with other services that are relevant later
 ___
-You'll be able to integrate more easily with services that don't even
-exist now. Lots of new things popping up every day.
-Adding these integrations will be easier and cheaper.
+Since you're not tying yourself to what's hot now, you can integrate more
+easily with services that don't even exist yet.
+And adding these integrations will be easier and cheaper.
 ------
 
 
-## Buying you relevancy
+## Extends your relevancy
 
-You're giving customers the flexibility to do anything they want
+Gives customers flexibility to do anything they want
 
-Better chance of fitting into their business and workflow over time
-
-Keeping your focus helps you own your niche
+Fit into their business and workflow over time
 ___
 Only the customer really knows what they're trying to do and how to best do
 it.
@@ -224,17 +252,27 @@ it.
 
 ## Document it well
 
-Make it easy for users to understand and get started with
+Make it easy to understand and get started with
+___
+Explaining your system helps you understand it better too.
+------
 
-Document it so they can build their own integrations
 
-Also a good starting point if you do integration work for clients
+## They can build their own integrations
+
+Also helpful when you do integration work for clients
 ------
 
 
 ## How do we do this?
+------
 
-What general pattern are we already familiar with as web developers?
+
+As web developers
+
+## what general integration pattern
+
+are we already familiar with?
 ------
 
 
@@ -266,7 +304,7 @@ attacks.
 ------
 
 
-## Why are they really trying to get their data?
+## Why do they want their data?
 
 ### To do things with it!
 ___
@@ -361,12 +399,10 @@ So what do I mean?
 ___
 The rate of their polling is constant.
 They do it once every few seconds.
-But the rate of their data changing is variable.
+But the rate at which their data changes is variable.
 Maybe it only changes every couple days, or only during business hours.
-
 Meaning, a majority of their polls won't return anything to act on.
-
-They're hitting up yuor server all the time, and usually it's for nothing.
+They're hitting your server all the time, and usually for nothing.
 Talk about disappointing.
 ------
 
@@ -375,9 +411,8 @@ Talk about disappointing.
 
 ### And it's still not Real-Time™
 ___
-Additionally, to approach acting in real-time, they have to poll more and
-more frequently. Except that, even when polling faster, they won't have truly
-Real-Time™ data.
+Additionally, to approach acting in real-time, they have to poll more and more
+frequently. Except that, even then, they won't have truly Real-Time™ data.
 ------
 
 
@@ -404,7 +439,7 @@ Real-Time™ data.
 
 ### is what's valuable
 
-## &amp;
+&amp;
 
 ### Polling helps them react quickly
 
@@ -459,21 +494,30 @@ _when_ data has changed
 ------
 
 
-## We do this over the web
+## Let's do this over the web
 
 since it's common infrastructure
 ___
+Same as how APIs work.
 No need to reinvent the wheel here.
 ------
 
 
 ## Client gives us a URL
 
-## &amp;
+&amp;
 
 ## We have events we watch for
+------
 
-When an event happens, we make an HTTP POST request to our client's URL
+
+When an event happens,
+
+## we make an HTTP POST request
+
+to our client's URL
+
+and deliver some data
 ------
 
 
@@ -521,9 +565,17 @@ This is Real-Time™
 ------
 
 
+This is what I mean by
+
+## Push Notifications for the web
+___
+Allowing others to act right when there's something to act on.
+------
+
+
 ### Exciting for integration!
 
-It's like Push Notifications for the web
+We'll see real-world examples later
 ------
 
 
@@ -577,7 +629,7 @@ A small web server which logs POST data
 
 ### In IRB
 
-    require ./examples/random_number_generator.rb'
+    require './examples/random_number_generator.rb'
     > puts RandomNumberGenerator.new.generate
     => 863
 ------
@@ -671,16 +723,25 @@ It's a general practice to
 ### when something happens
 ___
 The data we send is a JSON encoded string.
-Lots of flesibility.
-But that also means, there are things you'll have to try out on your own. Or issues you might have to re-solve in a way.
+------
+
+
+## Requires some effort
+
+Because it's a general pattern
+
+people have to implement the specifics
+___
+Lots of flexibility.
+But you'll have to experiment.
 ------
 
 
 ### How about another demo?
 
-- push a button on a site
-- generate a random number
-- send a text message
+- Push a button on a site
+- Generate a random number
+- Send a text message
 ------
 
 
@@ -696,6 +757,7 @@ But that also means, there are things you'll have to try out on your own. Or iss
 
 ![After sending random number](2_sent_random_number.png)
 ------
+
 
 ## And the text sent
 
@@ -745,30 +807,7 @@ But that also means, there are things you'll have to try out on your own. Or iss
 ------
 
 
-## What Can I Do With Them?
-
-Workflows are suddenly much easier
-
-- Post support emails, chat requests, and help forum posts in support
-  chatroom
-- Kick off continuous integration build after pushing commits to GitHub
-- Post to engineering chatroom when CI build/tests fails
-- Text employee when they've been assigned work
-- Reorder products, when inventory drops below threshold
-___
-Once the webhooks scaffolding is in place, you can tie many things together.
-------
-
-
-## After you see examples
-
-### the floodgates of possibility open
-
-![stampede.gif](stampede.gif)
-------
-
-
-## Who Uses Them?
+## Who uses them?
 
 Loads of companies!
 
@@ -784,11 +823,110 @@ understand how other people use them.
 ------
 
 
-## [Zapier](https://zapier.com/)
+## Get ready for more examples
 
-Connects many services together, using webhooks
+### Let open the floodgates of possibility
 
-Clients can integrate with many services
+![stampede.gif](stampede.gif)
+___
+Once the webhooks scaffolding is in place, you can tie many things together.
+------
+
+
+## Organize customer support
+
+Several services feed into our #support channel in Slack
+
+- Support emails
+- Tender help forum posts
+- Intercom messages
+------
+
+
+## Keep developers in the loop
+
+GitHub issues and pull requests feed into #github
+
+Continuous integration runs after pushing to GitHub
+
+CI passes/failures show in #engineering
+------
+
+
+## Have fun with your service
+
+![Geobooze feeds into Slack](fulcrum_geobooze.png)
+------
+
+
+## Enable timely communication
+
+[Send an email notification](http://www.fulcrumapp.com/blog/apps-script-integration/)
+
+when something needs immediate attention
+------
+
+
+## Sync with external services
+
+Sync with [CartoDB](https://cartodb.com) for visualization and analysis
+
+using [PHP](https://gist.github.com/bmcbride/5592f8f155bab86fa11e) or [Google Apps Script](https://gist.github.com/bmcbride/75301bd2332acb84aa54)
+------
+
+
+## Sync to external databases
+
+[Pull down data
+locally](http://www.fulcrumapp.com/blog/syncing-fulcrum-with-your-own-database/)
+
+to run through custom analysis pipelines
+------
+
+
+## Fetch data from external services
+
+Programmatically [add weather
+data](http://www.fulcrumapp.com/blog/adding-weather-data-to-your-fulcrum-records/)
+from [Forecast.io](https://developer.forecast.io/)
+
+- Automatic
+- Standardized
+- Accurate
+------
+
+
+## Platform and language agnostic
+
+Common web patterns make it
+
+plug and play with many tech stacks
+
+and more flexible for our clients
+___
+As long as they can use JSON, they're good to go.
+PHP, Ruby, Java, Node, whatever.
+They can swap out their entire pipeline if they want, but they can still use
+webhooks here. That's awesome!
+------
+
+
+They may not are about webhooks at first, but
+
+## Clients can grow into them
+___
+We give them to power to keep growing and do more advanced work down the road
+------
+
+
+## Services make integrations easier
+
+- [Zapier](https://zapier.com/)
+  - Connects many services together
+- [Pushbullet](https://www.pushbullet.com/)
+  - Push notifications to devices
+- [Google Apps Script](https://developers.google.com/apps-script/)
+  - Run webhook endpoints on Google
 ------
 
 
@@ -798,6 +936,14 @@ Clients can integrate with many services
 - Webhooks accompany an API to enable powerful integrations
 - Only real requirement is a web server
 - You can do lots of cool stuff with them
+------
+
+
+## Force multiplier
+
+We don't have a huge engineering team
+
+Webhooks allow us to have a greater impact
 ------
 
 
@@ -811,195 +957,6 @@ Clients can integrate with many services
 ___
 But these are for another talk!
 ------
-
-
-## How to Sell it to your manager
-## How to convey the business value
-
-TODO: How to sell it to your managers. Need to process that section and work
-it into the stuff above...
-
-##
-
-Customers don't mind paying for a service as long as they can get their data
-out
-
-They can pull it into their own DBs
-
-Run it through their own analysis.
-
-They can swap out their entire pipeline if they want, but they can still use
-webhooks here. That's awesome!
-
-##
-
-We've found it easy to get customers to adopt our service when they're
-replacing a link in their chain.
-
-We're not forcing them to rebuild their world.
-They can slot us in, without rearchitecting the world.
-
-They can design their workflow.
-
-##
-
-Although, because it's a general pattern, people have to implement the
-specifics.o
-
-Some effort they have to give.
-
-But things like Zapier make that a lot easier.
-
-##
-
-People don't even have to care about this at all initially
-
-But it's something we offer
-
-And as their use of our service grows, webhooks allows them to do more with
-our service.
-
-We give them the power to keep on growing and continue to use us.
-
-##
-
-Webhooks and Api are a good way to give them access to their data
-
-You're more plug-n-play
-
-## Foundation to build on
-
-Internal features could be built on this too.
-
-Use the notifications to kick off some other functionality.
-
-But you don't need to add it to the core of your system.
-
-Potential here for micro-services.
-
-## 
-
-Webhooks allow 2 applications to talk together easily
-
-One application listens for messages, and then does something with it
-
-Makes it easier to build integrations
-
-## How we use webhooks
-
-GeoBooze
-  - When people are enjoying a beverage, they can take a picture and then
-    upload the info about it, and that goes into slack. I think this is an
-    incoming webhook.
-
-Slack
-  - Support emails get put into slack
-  - Support tickets from tender get put into slack
-  - Support chats from intercom get put into slack
-  - Github commits, issues, and PRs get put into slack
-
-TODO: What about Slack Incoming/Outgoing webhooks? Look at the docs.
-
-------
-
-## How people use webhooks in Fulcrum
-
-To sync with an external database or service.
-Mirroring a table that exists in MySQL.
-Syncing data to CartoDB for visualization.
-Sending email notifications to manager when a new record is created and the
-status is "needs immediate attention."
-
-------
-
-## Use webhooks as a notification
-
-Our API serves up records JSON which needs to be cross referenced with the
-form JSON, which is the schema to understand it. (This is what makes fulcrum
-so flexible.) So you have to parse through it, which isn't fun to do for
-simple tasks.
-
-If you treat the webhook like a notification, then fetch the data from another
-endpoint which is more human readable, that's also a possibility. Makes it
-super easy to do certain things like update external databases this way.
-
-This is using webhooks with data shares.
-Explain data shares a little. Easy way to share your data with external people
-who don't need accounts. It's like a public, read-only feed of your data.
-
-Data shares are more easily consummable than the JSON from the API. Makes
-simple integrations easier to set up, since you don't have to parse the data
-schema and the data.
-
-------
-
-## Pushbullet for push notifications
-
-Someone in the office assigns a record
-That person who needs to do the work is texted a link
-The link is a deep link that opens fulcrum and prepopulates a new record with
-some information.
-
-Could do something like notify people within a certain geographic area. You
-could also assign the person who is known to be the closest.
-
-## Google App Scripts
-
-No server setup.
-
-Create a JS script, just like you would a Google Doc.
-
-Share it just like a google doc as well.
-___
-No heroku or setting up a PHP server.
-
-------
-
-## Webhooks as a Workflow
-
-When a record is submitted, you can use a webhook to fetch data from another
-web service (like weather information), and then use the API to update the
-record. Automatically fetch weather information, based on the location.
-
-Jason wrote a blog post about using the weather information. Bryan
-wants to do something like this for GeoBooze to add ABV data.
-
-Allows you to programattically add data from another service, based on
-whatever rules you want.
-------
-
-## Agnostic
-
-They can use PHP or Ruby or Node or Java or whatever they want.
-
-As long as it can read JSON.
-
-We're not writing custom libraries to support all different environments too
-------
-
-## Integration
-
-Our users can do all sorts of custom things. We can help them get set up, or
-they can do it themselves. But it's nice that it's a standard approach for
-each of these customers. The entire world isn't one-off.
-
-Lowers the barrier to integrations. They can read the docs and get started
-themselves.
-It's a force multiplier.
-
-We don't have a huge engineering team, so it allows us to have a greater
-impact.
-
-We don't need a developer to add stuff to our core product for these
-integrations.
-------
-
-
-
-
-
-------
-
 
 
 ## Webhooks Docs for Fulcrum
@@ -1036,10 +993,10 @@ webhooks to your project.
 ------
 
 
-## I'd love your Feedback
+## I'd love your feedback
 ___
 How did I do with my talk?
-How you'd use webhooks?
+How would you use webhooks?
 Or thoughts on this topic in general.
 ------
 
