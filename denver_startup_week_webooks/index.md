@@ -13,8 +13,8 @@ North America.
 
 ![Denver Startup Week - Title Slide 3](dsw_title_3.png)
 ___
-This session is part of the Developer Track, sponsored by Pivotal Labs, one of
-six programming tracks aimed at the entire entrepreneurial team.
+This session is part of the Developer Track, sponsored by Pivotal Labs. It's
+one of six programming tracks aimed at the entire entrepreneurial team.
 ------
 
 
@@ -45,6 +45,8 @@ ___
 Ours have been in operation for about a year and a half. I wanted to share
 what I've learned. Maybe you'll find it useful or interesting. And I would
 love to get your feedback as well.
+To date, our system has handled over 11.3 million webhook requests.
+
 ------
 
 
@@ -84,7 +86,6 @@ Trying to get a feel for what familiarity people have with the topic.
 - Barebones webhooks demo
 - Webhooks integration demo
 - Other use cases for webhooks
-- Demonstrate the value to your manager
 - Recapping and wrapping up
 ------
 
@@ -593,6 +594,17 @@ Start small &amp; build momentum
 ------
 
 
+### The Idea
+
+- Generate a random number
+- Send a webhook to our client with that number
+
+We'll have a client server running, [Polis.rb](https://github.com/kyletolle/polis.rb)
+
+A small web server which logs POST data
+------
+
+
 ## Random Number Generator
 
     require_relative '../lib/webhooks'
@@ -613,17 +625,6 @@ Start small &amp; build momentum
       end
     end
 
-------
-
-
-### The Idea
-
-- Generate a random number
-- Send a webhook to our client with that number
-
-We'll have a client server running, [Polis.rb](https://github.com/kyletolle/polis.rb)
-
-A small web server which logs POST data
 ------
 
 
@@ -715,6 +716,8 @@ random number it received.
 
 
 ## There's no official spec
+------
+
 
 It's a general practice to
 
@@ -728,9 +731,9 @@ The data we send is a JSON encoded string.
 
 ## Requires some effort
 
-Because it's a general pattern
+to implement the specifics
 
-people have to implement the specifics
+but the idea has been around for a while
 ___
 Lots of flexibility.
 But you'll have to experiment.
@@ -911,7 +914,7 @@ webhooks here. That's awesome!
 ------
 
 
-They may not are about webhooks at first, but
+They may not care about webhooks at first, but
 
 ## Clients can grow into them
 ___
