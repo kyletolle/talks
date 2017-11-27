@@ -1,6 +1,6 @@
 # An Intro to Databases for Developers
 
-With Exciting Knowledge, Of Course!
+SELECT * FROM exciting_knowledge;
 ------
 
 
@@ -13,11 +13,18 @@ With Exciting Knowledge, Of Course!
 
 Software Engineer on Sabbatical
 
-Member of the industry for 8 years.
+Member of the software industry for 8 years.
 ------
 
-I've worked on tools supporting satellite simulation, ICBM command and control, geospatial data collection, and mobile wallet applications (order-ahead, loyalty, coupons) for large restaurant chains.
+# Some Projects I've Worked On
 
+- tools supporting satellite simulation
+- ICBM command and control system
+- geospatial data collection
+- mobile wallet applications
+___
+mobile wallet includes things like order-ahead, loyalty, coupons for large restaurant chains.
+------
 
 # First off
 
@@ -29,19 +36,39 @@ Ask questions at any time!
 
 ### Presentation:
 
-[https://kyletolle.github.io/databases_and_developers](https://kyletolle.github.io/databases_and_developers)
+[https://kyletolle.github.io/dbs_and_devtalk](https://kyletolle.github.io/dbs_and_devs_talk)
 
 ### Code:
 
-[https://github.com/kyletolle/databases_and_developers](https://github.com/kyletolle/databases_and_developers)
+[https://github.com/kyletolle/dbs_and_devs_talk](https://github.com/kyletolle/dbs_and_devs_talk)
 ------
 
 
 # Overview
 
+- ...
+- ...
+
 ------
 
-- Why should you know it?
+In order to do something useful with software, we need data
+
+We need to store that data somewhere.
+
+That somewhere is usually databases.
+
+------
+
+Web applications typically start using a SQL database
+
+May migrate to something more complex as they grow
+
+-------
+
+With our database set up, we can access it for the web application, analytics, reports, etc.
+
+-------
+
 - You'll use SQL during your career.
 - It's used for setting up applications, analytics, etc
 - Applications will likely start out with SQL and then portions will migrate to more complex setups as they grow and require it.
@@ -65,19 +92,27 @@ https://en.wikipedia.org/wiki/Flat_file_database
 
 - Databases
   - Relational
+    - https://en.wikipedia.org/wiki/Relational_database
+    - https://en.wikipedia.org/wiki/Relational_model
     - Schemas
       - Tables
         - https://en.wikipedia.org/wiki/Table_(database)
         - Columns
-        - Rows
-
+        - Rows (also called records)
       - Fields
+        - https://en.wikipedia.org/wiki/Field_(computer_science) 
       - Indexes
       - Relationships
+      - Views
+        - https://en.wikipedia.org/wiki/View_(SQL)
+        - A query is stored and then the results are calculated at run-time.
+        - Can represent a subset of a much larger table
     - Queries
   - Database management system
     - https://en.wikipedia.org/wiki/Database
     - > A general-purpose DBMS allows the definition, creation, querying, update, and administration of databases.
+  - Relational DBMS
+    - https://en.wikipedia.org/wiki/Relational_database_management_system
 ---
   - CAP Theorem
     - https://en.wikipedia.org/wiki/CAP_theorem
@@ -91,6 +126,7 @@ https://en.wikipedia.org/wiki/Flat_file_database
   - CRUD
     - Create, Read, Update, Delete
   - Transactions
+    - https://en.wikipedia.org/wiki/Database_transaction
     - https://en.wikipedia.org/wiki/Commit_(data_management)
     - Example of a transaction
     - `BEGIN WORK` - Marks the beginning of a transaction
@@ -123,7 +159,9 @@ https://en.wikipedia.org/wiki/Flat_file_database
     - To allow parent-child relationships.
   - Types of databases
     - NoSQL (Mongo)
+      - https://en.wikipedia.org/wiki/NoSQL
     - SQL (MySQL)
+      - https://en.wikipedia.org/wiki/SQL
     - Key-Value (Redis)
     - Centralized?
       - https://en.wikipedia.org/wiki/Centralized_database
@@ -194,6 +232,7 @@ https://en.wikipedia.org/wiki/Flat_file_database
     - Make reads fast
   - Duplication of data
   - Data integrity
+    - https://en.wikipedia.org/wiki/Data_integrity#Databases
   - Application-level integrity vs Database-level integrity
   - Permissions on tables
   - Normalizing
@@ -224,6 +263,7 @@ https://en.wikipedia.org/wiki/Flat_file_database
     - Row locks help keep the table from being unresponsive and are released often
     - Then update the table to not allow null values.
   - Triggers
+    - https://en.wikipedia.org/wiki/Database_trigger
   - Views
   - Data anlytics
     - Generating reports from the data
@@ -390,6 +430,7 @@ Start small &amp; build momentum
 
 - Where can you learn more?
   - Khan Academy?
+  - https://www.khanacademy.org/computing/computer-programming/sql/sql-basics/v/welcome-to-sql
 ------
 
 
