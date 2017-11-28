@@ -159,12 +159,6 @@ One of the simplest.
 # Flat Files*
 
 The humble beginnings
-
-<br />
-<br />
-<br />
-<br />
-
 ___
 On computers, at least.
 ------
@@ -522,7 +516,6 @@ Flat files
   - ORM
     - Object Relational Mapping.
     - Rails follows the Active record pattern
-
     - https://en.wikipedia.org/wiki/Active_record_pattern
     - https://www.martinfowler.com/eaaCatalog/activeRecord.html
     - > An object that wraps a row in a database table or view, encapsulates the database access, and adds domain logic on that data.
@@ -630,124 +623,16 @@ we need some background
 what we know
 ------
 
-Formats:
-- CSV
-- XML
-- JSON
-- Binary Files
-
-- Some of these are data-interchange formats. Getting data from one system into another.
-
-- REST is one pattern of implementing a web service
-- The above formats can be used to send the data
-- https://en.wikipedia.org/wiki/Representational_state_transfer
-
-## Downsides
-------
-
-
-## #1
-
-### ...
-------
-
-
-### How long until
-
-------
-
-
-## #2
-
-### ...
-------
-
-
-## #3
-
-### ...
-------
-
-
-## #4
-
-### ...
-------
-
-
-## Okay
-
-### we see the disadvantages
-------
-
-
-## But so what?
-
-### We already know how to use these formats
-
-- It exists
-- It works
-------
-
-
-## Let's come back to what's important
-------
-
-
-### ...
-
-------
-
-## The Benefits
-------
-
-
-## #1
-
-### ...
-------
-
-
-## #2
-
-### ...
-------
-
-
-## #3
-
-### ...
-------
-
-## Let's see a small example
-
-### Show us ...
-
-Start small &amp; build momentum
-------
-
-
-## ...
-
-    some code here
-
-------
-
-
-### The Idea
-
-- ...
-- ...
 
 ------
 
 
 ## Database Recap
 
-- Communicate events between your server and a client's using HTTP
-- Webhooks accompany an API to enable powerful integrations
-- Only real requirement is a web server
-- You can do lots of cool stuff with them
+- ...
+- ...
+- ...
+- ...
 ------
 
 
