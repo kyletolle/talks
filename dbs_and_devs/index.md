@@ -1,34 +1,39 @@
-# An Intro to Databases for Developers
+#  Databases and Developers
 
 SELECT * FROM exciting_knowledge;
 ------
 
 
-# Who am I?
+First off
 
-## Kyle Tolle
+## Ask questions
+
+### at any time!
+------
+
+
+## Who am I?
+
+# Kyle Tolle
 
 [kyletolle.com](http://kyletolle.com) |
 [@kyletolle](https://twitter.com/kyletolle)
 
 Software Engineer on Sabbatical
-
+___
 Member of the software industry for 8 years.
 ------
 
-# Some Projects I've Worked On
 
-- tools supporting satellite simulation
-- ICBM command and control system
-- geospatial data collection
-- mobile wallet applications
-___
-mobile wallet includes things like order-ahead, loyalty, coupons for large restaurant chains.
-------
+### Not a database expert
 
-# First off
+but I want to
 
-Ask questions at any time!
+## share
+
+some of what
+
+## I've learned
 ------
 
 
@@ -36,7 +41,7 @@ Ask questions at any time!
 
 ### Presentation:
 
-[https://kyletolle.github.io/dbs_and_devtalk](https://kyletolle.github.io/dbs_and_devs_talk)
+[https://kyletolle.github.io/dbs_and_devs_talk](https://kyletolle.github.io/dbs_and_devs_talk)
 
 ### Code:
 
@@ -44,28 +49,350 @@ Ask questions at any time!
 ------
 
 
+# Past Jobs
+
+- tools supporting satellite simulation
+- ICBM command and control system
+- geospatial data collection
+- mobile wallet applications
+___
+mobile wallet includes things like order-ahead, loyalty, coupons for large restaurant chains.
+These jobs are diverse but they all had something in common: using databases.
+------
+
+
 # Overview
 
 - ...
 - ...
-
+- Fill this out more after the talk has taken shape
 ------
 
-In order to do something useful with software, we need data
 
+Let's start at
+
+## The Very Beginning
+___
+Sometimes we hop into the middle of things, and it's good to think back on the beginning and understand the context in which things came about.
+------
+
+
+### Humans are
+
+## knowledge-hunters
+
+&
+
+## data-gatherers
+___
+We take in the world as it is and can see it how it will be later.
+We see a line on the ground and know a deer walks here often.
+Then we wait there, because we know we will see the deer in the future.
+------
+
+
+## We like to
+
+- Collect data
+- Store it
+- Process it
+___
+We gather information from the world around us and do a lot with it.
+------
+
+
+Over time, we
+
+## streamline
+
+&
+
+## refine
+------
+
+
+We have developed
+
+## hardware
+
+&
+
+## software
+___
+to help us think more quickly.
+------
+
+
+## Software crunches
+
+# data
+------
+
+
+## Data needs
+
+# a home
+___
+In order to do something useful with software, we need data.
 We need to store that data somewhere.
-
 That somewhere is usually databases.
-
 ------
 
+
+## a.k.a.
+
+# A Data Store
+------
+
+
+## What kinds
+
+of data stores
+
+are there?
+___
+We will talk about a few types, but let's start with one.
+One of the simplest.
+------
+
+
+# Flat Files*
+
+The humble beginnings
+
+<br />
+<br />
+<br />
+<br />
+
+___
+On computers, at least.
+------
+
+
+`$ cat students.csv`
+
+    Id, Name, Grade
+    1,  Ted,  B
+    2,  Stan, A-
+    3,  Fred, C++
+    4,  Ned,  5%
+------
+
+
+## Easy peasy
+
+File lives on my computer
+------
+
+
+This is a
+
+### valid strategy
+___
+I access it when I need it.
+Some things don't need to be complicated.
+------
+
+
+### Flat Files
+
+can be used for
+
+## Data Interchange
+___
+Passing data between systems
+------
+
+
+## Common flat file types
+
+- CSV
+- HTML
+- XML
+- JSON
+- ini
+- conf
+___
+Flat files allow us to pass data between systems.
+They allow us to store simple information when anything more complex would be overkill.
+------
+
+
+Then, things grow
+
+## Complicated
+------
+
+Want to
+
+## know more
+
+### about the data
+------
+
+
+Want to
+
+## ask questions
+
+### of it
+------
+
+
+Want to
+
+## give access
+
+### to it
+___
+Want to give access to multiple people or programs.
+------
+
+
+- Web application
+- Report generation
+- Analysis performation
+------
+
+
+Some smart folks
+
+## invented the
+
+# database
+------
+
+
+## Data organization on
+
+# steroids
+------
+
+
+In 1970, E.F. Codd described the
+
+## [Relational Model](https://en.wikipedia.org/wiki/Relational_model)
+------
+
+
+## Relational Model
+
+![Relational Model Concepts](./relational_model_concepts.png)*
+
+<br />
+
+<small>*: By <a href="//commons.wikimedia.org/wiki/User:AutumnSnow" title="User:AutumnSnow">User:AutumnSnow</a> - <span class="int-own-work" lang="en">Own work</span>, <a href="http://creativecommons.org/licenses/by-sa/3.0/" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=1313684">Link</a><small>
+------
+
+
+This is the foundation for the
+
+# Relational Database
+------
+
+
+We interact with a
+
+### Relational Database
+
+using
+
+# SQL
+------
+
+# SQL is a <abbr title="domain-specific language">DSL</abbr>
+
+for managing data
+------
+
+
+# SQL is an <abbr title="application programming interface">API</abbr>
+
+for managing data
+------
+
+
+Remember that student data
+
+we had earlier?
+------
+
+
+    Id, Name, Grade
+    1,  Ted,  B
+    2,  Stan, A-
+    3,  Fred, C++
+    4,  Ned,  5%
+------
+
+
+## Put a database on it
+
+![Put a bird on it](./put_a_bird_on_it.jpg)
+___
+Portlandia!
+------
+
+
+We have a
+
+# Table
+
+with
+
+## Rows & Columns
+___
+Let's simplify the Relational Model terms
+------
+
+This leads us to our
+
+# Database Schema
+___
+This is a formal definition of our data.
+------
+
+
+# Table
+
+The name of the collection of our data
+
+`Students`
+------
+
+
+# Row
+
+Each individual student's data
+
+    1, Ted, B
+------
+
+# Column
+
+An attribute of the student
+
+    Grade
+    B
+    A-
+    C++
+    5%
+------
+
+
+
+
+
+# TODO: LEFT OFF HERE!
+
+
+
+
+------
 Web applications typically start using a SQL database
 
 May migrate to something more complex as they grow
-
--------
-
-With our database set up, we can access it for the web application, analytics, reports, etc.
 
 -------
 
@@ -83,24 +410,29 @@ Simple databases
 
 Flat files
 
-https://en.wikipedia.org/wiki/Flat_file_database
+
 
 ------
+
+## Links
+
+- [Flat files](https://en.wikipedia.org/wiki/Flat_file_database)
+- [Relational model](https://en.wikipedia.org/wiki/Relational_model)
+- [Relational database](https://en.wikipedia.org/wiki/Relational_database)
+- [SQL](https://en.wikipedia.org/wiki/SQL)
 
 
 ------
 
 - Databases
   - Relational
-    - https://en.wikipedia.org/wiki/Relational_database
-    - https://en.wikipedia.org/wiki/Relational_model
     - Schemas
       - Tables
         - https://en.wikipedia.org/wiki/Table_(database)
         - Columns
         - Rows (also called records)
       - Fields
-        - https://en.wikipedia.org/wiki/Field_(computer_science) 
+        - https://en.wikipedia.org/wiki/Field_(computer_science)
       - Indexes
       - Relationships
       - Views
