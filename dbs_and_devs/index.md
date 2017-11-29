@@ -1261,7 +1261,7 @@ to make sure it works!
 - [101 things I wish I knew...](https://thomaslarock.com/2015/06/101-things-i-wish-you-knew-about-sql-server/)
 ------
 
-# Drop postgres table
+# Drop Postgres table
 
 `dropdb dbs_and_devs_talk`
 ------
