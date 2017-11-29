@@ -63,9 +63,10 @@ These jobs are diverse but they all had something in common: using databases.
 
 # Overview
 
-- ...
-- ...
-- Fill this out more after the talk has taken shape
+- Background
+- ORMs
+- DB Theory
+- Important Concepts
 ------
 
 
@@ -74,6 +75,7 @@ Let's start at
 ## The Very Beginning
 ___
 Sometimes we hop into the middle of things, and it's good to think back on the beginning and understand the context in which things came about.
+You're going to be familiar with this first part, so I will breeze through it.
 ------
 
 
@@ -349,6 +351,8 @@ Let's drop into
 
 ## View Data
 
+`SELECT * FROM backpacks;`
+
 {:.text}
      id | color | student_id
     ====+=======+============
@@ -526,7 +530,7 @@ follows the
 ------
 
 
-## Active Record is a DSL
+## ActiveRecord is a DSL
 
 We can modify SQL data with it
 ------
@@ -545,7 +549,7 @@ The console shows us
 
 for various
 
-## Active Record methods
+## ActiveRecord methods
 ------
 
 
@@ -645,7 +649,7 @@ Either both get updated or neither do.
 
 ## Dynamically generated
 
-Active Record analyzes the table and
+ActiveRecord analyzes the table and
 
 generates the correct query
 ------
@@ -658,7 +662,7 @@ generates the correct query
 ------
 
 
-Active Record measures
+ActiveRecord measures
 
 ## how long
 
@@ -706,7 +710,7 @@ columns?
 ------
 
 
-Active Record automatically tracks
+ActiveRecord automatically tracks
 
 ## creation & modification
 
@@ -719,7 +723,7 @@ times of each record
 
 # Viewing
 
-`Post.last`
+`post = Post.last`
 
 {:.text}
     SELECT  "posts".* FROM "posts"
@@ -729,6 +733,20 @@ times of each record
               body: "Viral to the max.",
               created_at: "2017-11-29 01:37:50",
               updated_at: "2017-11-29 01:37:50">
+------
+
+# Using
+`post.title`
+
+{:.text}
+    => "First!"
+
+`post.updated_at`
+
+{:.text}
+    => Wed, 29 Nov 2017 02:31:07 UTC +00:00
+
+
 ------
 
 
@@ -781,27 +799,28 @@ This is not an exhaustive list
 Migrations support
 
 ## rolling back schema
+
+`rails db:rollback`
 ------
 
 
 ## Create a Relationship
 
 {:.sh}
-    rails g model like post:references author:references
+    rails g model like post:references
 
 {:.ruby}
     class CreateLikes < ActiveRecord::Migration[5.1]
       def change
         create_table :likes do |t|
           t.references :post, foreign_key: true
-          t.references :author, foreign_key: true
 
           t.timestamps
         end
       end
     end
 
-- Adds indexes for `author_id`, `post_id`
+- Adds indexes for `post_id`
 ------
 
 
@@ -916,6 +935,7 @@ support multiple databases through
 ### DB Adapters
 ___
 The same DSL works for MySQL, Postgres, etc.
+You don't have to change your Rails code even if you switch your backing data store.
 ------
 
 
@@ -1062,11 +1082,11 @@ Changing the database schema as your needs change
 
 # Migrations, cont.
 
-- Migrating the database by hand is tricky.
-- Need to be consistent.
+- Migrating the database by hand is tricky
+- Need to be consistent
 - Need to do it across many machines (many developers)
 - Need to do it differently in different environments
-  - PRD has multiple DBs whereas DEV has one local DB.
+  - PRD has multiple DBs whereas DEV has one local DB
 ------
 
 
@@ -1077,17 +1097,24 @@ Changing the database schema as your needs change
 
 - Keep databases online
   - Have to make sure old version of app works with new DB schema
-  - Might have to make multiple deployments.
+  - Might have to make multiple deployments
 ------
 
 
 # Migrations, cont.
 
-For example, to rename a column:
+To keep the db online and rename a column:
 
-  - Deploy code that duplicates a column with a new name
-  - Deploy code that references the new column
-  - Deploy code that deletes the old column
+  - First deploy
+    - Duplicate column `old_name` to one called `new_name`
+    - Add code that updates `new_name` as well as `old_name`
+------
+
+
+# Migrations, cont.
+  - Second deploy
+    - Change all code references from `old_name` to `new_name`
+    - Remove now-unused column `old_name`
 ------
 
 
@@ -1095,14 +1122,16 @@ For example, to rename a column:
 
 Application-level integrity vs Database-level integrity
 
-  - Database can enforce referential integrity (city exists when creating a weather report)
-  - Application can enforce higher-level things (Only an admin user can modify this record)
+  - Database can enforce referential integrity
+    - Post exists when creating a like
+  - Application can enforce higher-level things
+    - Only a person with specific permissions can modify this post
 ------
 
 
 # Locks
 
-Adding a non null column to a large table
+Adding a non-null column to a large table
 
 can lock the table
 
@@ -1112,14 +1141,14 @@ and prevent reads or writes
 
 # Locks, cont.
 
-To prevent a long table lock
+To prevent a long table lock:
 
 - Add a column that allows null values
   - Table is only locked for a short time
 - Update each row to have a default value
   - This will lock each row for a short time
 - Update the column to not allow null values
-  - Since each column already has
+  - Since each column already has a value, the lock is released quickly
 ------
 
 
@@ -1130,7 +1159,7 @@ To prevent a long table lock
   - More Memory
   - More Disk Space
   - [Caching](https://en.wikipedia.org/wiki/Database_caching)
-  - [Partitioning](https://en.wikipedia.org/wiki/Partition_(database)) large tables  data across nodes
+  - [Partitioning](https://en.wikipedia.org/wiki/Partition_(database)) data across tables
 ------
 
 
@@ -1140,7 +1169,7 @@ To prevent a long table lock
   - Load balancing
   - Create a pool of nodes
   - Add more nodes to the pool
-  - [Sharding](https://en.wikipedia.org/wiki/Shard_(database_architecture))
+  - [Sharding](https://en.wikipedia.org/wiki/Shard_(database_architecture)) data across nodes
 ------
 
 
@@ -1199,7 +1228,7 @@ to make sure it works!
 - Stored Procedures
 - Reports/Analytics
 - Spatial extensions
-- Self-hosted vs Cloud
+- Self-hosted vs Cloud-hosted
 ------
 
 
@@ -1228,6 +1257,11 @@ to make sure it works!
 - [Python ORMs](https://www.pythoncentral.io/sqlalchemy-vs-orms/)
 - [Khan Academy SQL Basics](https://www.khanacademy.org/computing/computer-programming/sql/sql-basics/v/welcome-to-sql)
 - [101 things I wish I knew...](https://thomaslarock.com/2015/06/101-things-i-wish-you-knew-about-sql-server/)
+------
+
+# Drop postgres table
+
+`dropdb dbs_and_devs_talk`
 ------
 
 
