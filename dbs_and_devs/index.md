@@ -101,28 +101,6 @@ We gather information from the world around us and do a lot with it.
 ------
 
 
-Over time, we
-
-## streamline
-
-&
-
-## refine
-------
-
-
-We have developed
-
-## hardware
-
-&
-
-## software
-___
-to help us think more quickly.
-------
-
-
 ## Software crunches
 
 # data
@@ -145,26 +123,13 @@ That somewhere is usually databases.
 ------
 
 
-## What kinds
+### Data's earliest home
 
-of data stores
-
-are there?
-___
-We will talk about a few types, but let's start with one.
-One of the simplest.
+# The Flat File
 ------
 
 
-# Flat Files*
-
-The humble beginnings
-___
-On computers, at least.
-------
-
-
-`$ cat students.csv`
+`cat students.csv`
 
     Id, Name, Grade
     1,  Ted,  B
@@ -176,16 +141,7 @@ On computers, at least.
 
 ## Easy peasy
 
-File lives on my computer
-------
-
-
-This is a
-
-### valid strategy
-___
-I access it when I need it.
-Some things don't need to be complicated.
+Some things don't need to be complicated
 ------
 
 
@@ -218,31 +174,16 @@ Then, things grow
 ## Complicated
 ------
 
-Want to
 
-## know more
+### Want to
 
-### about the data
+- know more
+- ask questions
+- give access
 ------
 
 
-Want to
-
-## ask questions
-
-### of it
-------
-
-
-Want to
-
-## give access
-
-### to it
-___
-Want to give access to multiple people or programs.
-------
-
+## Use the data for
 
 - Web application
 - Report generation
@@ -250,7 +191,9 @@ Want to give access to multiple people or programs.
 ------
 
 
-Some smart folks
+Fortunately for us,
+
+some smart folks
 
 ## invented the
 
@@ -258,58 +201,43 @@ Some smart folks
 ------
 
 
-## Data organization on
+Popular DBs according to Devs
 
-# steroids
+![Popular DBs chart](./popular_dbs.png)
+
+<small><https://insights.stackoverflow.com/survey/2017#technology-databases></small>
 ------
 
 
-In 1970, E.F. Codd described the
-
-## [Relational Model](https://en.wikipedia.org/wiki/Relational_model)
-------
-
+Many common DBs use the
 
 ## Relational Model
 
 ![Relational Model Concepts](./relational_model_concepts.png)*
 
-<br />
-
 <small>*: By <a href="//commons.wikimedia.org/wiki/User:AutumnSnow" title="User:AutumnSnow">User:AutumnSnow</a> - <span class="int-own-work" lang="en">Own work</span>, <a href="http://creativecommons.org/licenses/by-sa/3.0/" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=1313684">Link</a><small>
 ------
 
 
-This is the foundation for the
+In other words, we have a
 
-# Relational Database
-------
+# Table
 
+with
 
-We interact with a
-
-### Relational Database
-
-using
-
-# SQL
+## Rows & Columns
 ------
 
 # SQL is a <abbr title="domain-specific language">DSL</abbr>
 
-for managing data
+
+for managing data in a
+
+## Relational DB
 ------
 
 
-# SQL is an <abbr title="application programming interface">API</abbr>
-
-for managing data
-------
-
-
-Remember that student data
-
-we had earlier?
+Remember our student data?
 ------
 
 
@@ -321,7 +249,7 @@ we had earlier?
 ------
 
 
-## Put a database on it
+## Put a database on it!
 
 ![Put a bird on it](./put_a_bird_on_it.jpg)
 ___
@@ -329,49 +257,141 @@ Portlandia!
 ------
 
 
-We have a
+`students`
 
-# Table
+|Id|Name|Grade|
+|1 |Ted |B    |
+|2 |Stan|A-   |
+|3 |Fred|C++  |
+|4 |Ned |5%   |
+------
 
-with
 
-## Rows & Columns
+The `table` has a `schema`.
+
+Each `row` is a `record`.
+
+Each `column` is an `attribute`.
+------
+
+
+Let's drop into
+
+# Postgres
+------
+
+
+## Install Postgres
+
+`brew install postgres`
+------
+
+
+## Start Postgres
+
+`brew services start postgresql`
+------
+
+
+## Create a DB
+
+`createdb dbs_and_devs_talk`
+------
+
+
+## Connect to the DB
+
+`psql dbs_and_devs_talk`
+------
+
+
+# Create a Table
+
+    CREATE TABLE students(
+      id SERIAL,
+      name TEXT NOT NULL,
+      grade TEXT NOT NULL,
+      PRIMARY KEY(id)
+    );
+------
+
+
+# Insert Data
+
+    INSERT INTO students (name, grade) values ('Ted', 'B');
+    INSERT INTO students (name, grade) values ('Stan', 'A-');
+    INSERT INTO students (name, grade) values ('Fred', 'C++');
+    INSERT INTO students (name, grade) values ('Ned', '5%');
+------
+
+
+# View Data
+
+`SELECT * FROM students;`
+
+![Query result](./select_from_students.png)
+------
+
+
+Do stuff
+
+## the hard way
+
+for a while
+------
+
+![I dare you not to use your tools](no_tools.jpg)
+------
+
+
+### Allows you to understand
+
+- the benefits of your tools
+- the limits of your tools
+- how to work around those limits
+------
+
+
+Plus, learn to
+
+## channel your anger
+
+![Angry Anakin](./angry_anakin.jpg)
+------
+
+
+
+# Useful Tools
+
+- [pgAdmin 4](https://www.pgadmin.org/download/pgadmin-4-macos/)
+- [Postico](https://eggerapps.at/postico/)
+- ORMs
 ___
-Let's simplify the Relational Model terms
-------
-
-This leads us to our
-
-# Database Schema
-___
-This is a formal definition of our data.
+Great for managing the database without typing everything yourself.
 ------
 
 
-# Table
+# ORM
 
-The name of the collection of our data
-
-`Students`
+Object-Relational Mapping
 ------
 
 
-# Row
+Maps
 
-Each individual student's data
+## database records
 
-    1, Ted, B
+to
+
+## object instances
 ------
 
-# Column
 
-An attribute of the student
+# Ruby on Rails
 
-    Grade
-    B
-    A-
-    C++
-    5%
+follows the
+
+## [Active Record pattern](https://www.martinfowler.com/eaaCatalog/activeRecord.html)
 ------
 
 
@@ -390,22 +410,6 @@ May migrate to something more complex as they grow
 
 -------
 
-- You'll use SQL during your career.
-- It's used for setting up applications, analytics, etc
-- Applications will likely start out with SQL and then portions will migrate to more complex setups as they grow and require it.
-
-------
-
-First, a little background
-
-------
-
-Simple databases
-
-Flat files
-
-
-
 ------
 
 ## Links
@@ -414,23 +418,19 @@ Flat files
 - [Relational model](https://en.wikipedia.org/wiki/Relational_model)
 - [Relational database](https://en.wikipedia.org/wiki/Relational_database)
 - [SQL](https://en.wikipedia.org/wiki/SQL)
-
+- [Tables](https://en.wikipedia.org/wiki/Table_(database))
+- [Fields](https://en.wikipedia.org/wiki/Field_(computer_science))
+- [Active Record pattern](https://en.wikipedia.org/wiki/Active_record_pattern)
+- [Views](https://en.wikipedia.org/wiki/View_(SQL))
 
 ------
 
 - Databases
   - Relational
     - Schemas
-      - Tables
-        - https://en.wikipedia.org/wiki/Table_(database)
-        - Columns
-        - Rows (also called records)
-      - Fields
-        - https://en.wikipedia.org/wiki/Field_(computer_science)
       - Indexes
       - Relationships
       - Views
-        - https://en.wikipedia.org/wiki/View_(SQL)
         - A query is stored and then the results are calculated at run-time.
         - Can represent a subset of a much larger table
     - Queries
@@ -516,8 +516,6 @@ Flat files
   - ORM
     - Object Relational Mapping.
     - Rails follows the Active record pattern
-    - https://en.wikipedia.org/wiki/Active_record_pattern
-    - https://www.martinfowler.com/eaaCatalog/activeRecord.html
     - > An object that wraps a row in a database table or view, encapsulates the database access, and adds domain logic on that data.
     - Martin Fowler
     - In fact, the library that handles this stuff is called `ActiveRecord`
@@ -603,7 +601,6 @@ Flat files
   - Self-hosted vs cloud
 
 
-
 ------
 
 ## So I'm here
@@ -646,8 +643,7 @@ what we know
 ## What's Next?
 
 - Where can you learn more?
-  - Khan Academy?
-  - https://www.khanacademy.org/computing/computer-programming/sql/sql-basics/v/welcome-to-sql
+  - [Khan Academy SQL Basics](https://www.khanacademy.org/computing/computer-programming/sql/sql-basics/v/welcome-to-sql)
 ------
 
 
