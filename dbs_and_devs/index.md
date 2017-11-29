@@ -1131,11 +1131,24 @@ To prevent a long table lock
   - More Disk Space
   - [Caching](https://en.wikipedia.org/wiki/Database_caching)
   - [Partitioning](https://en.wikipedia.org/wiki/Partition_(database)) large tables  data across nodes
-- Horizontal - More servers
+------
+
+
+## Scaling, cont.
+
+- Horizontal
   - Load balancing
   - Create a pool of nodes
   - Add more nodes to the pool
   - [Sharding](https://en.wikipedia.org/wiki/Shard_(database_architecture))
+------
+
+
+## Scaling, cont.
+
+- Tools to manage bigness
+  - [gh-ost](https://github.com/github/gh-ost) for migrations
+  - [Hadoop](http://hadoop.apache.org/)
 ------
 
 
