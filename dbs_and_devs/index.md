@@ -1,6 +1,6 @@
 #  Databases and Developers
 
-SELECT * FROM exciting_knowledge;
+`SELECT * FROM exciting_knowledge;`
 ------
 
 
@@ -319,7 +319,7 @@ Let's drop into
 
 ## View Data
 
-`SELECT * FROM students;`
+    SELECT * FROM students;
 
 {:.text}
      id | name | grade
@@ -351,7 +351,7 @@ Let's drop into
 
 ## View Data
 
-`SELECT * FROM backpacks;`
+    SELECT * FROM backpacks;
 
 {:.text}
      id | color | student_id
@@ -479,6 +479,7 @@ follows the
 
 # Install Rails
 
+{:.sh}
     gem install rails
     rails --version
 
@@ -490,6 +491,7 @@ follows the
 
 # Create Rails app
 
+{:.sh}
     rails new blog
     cd blog
 ------
