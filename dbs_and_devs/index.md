@@ -131,6 +131,7 @@ That somewhere is usually databases.
 
 `cat students.csv`
 
+{:.text}
     Id, Name, Grade
     1,  Ted,  B
     2,  Stan, A-
@@ -241,6 +242,7 @@ Remember our student data?
 ------
 
 
+{:.text}
     Id, Name, Grade
     1,  Ted,  B
     2,  Stan, A-
@@ -259,11 +261,14 @@ Portlandia!
 
 `students`
 
-|Id|Name|Grade|
-|1 |Ted |B    |
-|2 |Stan|A-   |
-|3 |Fred|C++  |
-|4 |Ned |5%   |
+| -  +   -  +   -   |
+| id | name | grade |
+| -  +   -  +   -   |
+| 1  | Ted  | B     |
+| 2  | Stan | A-    |
+| 3  | Fred | C++   |
+| 4  | Ned  | 5%    |
+| -  +   -  +   -   |
 ------
 
 
@@ -283,6 +288,7 @@ Let's drop into
 
 # Set up Postgres
 
+{:.sh}
     brew install postgres
     brew services start postgresql
     createdb dbs_and_devs_talk
@@ -293,10 +299,9 @@ Let's drop into
 # Create a Table
 
     CREATE TABLE students(
-      id SERIAL,
+      id SERIAL PRIMARY KEY,
       name TEXT NOT NULL,
-      grade TEXT NOT NULL,
-      PRIMARY KEY(id)
+      grade TEXT NOT NULL
     );
 ------
 
@@ -314,13 +319,75 @@ Let's drop into
 
 `SELECT * FROM students;`
 
-![Query result](./select_from_students.png)
+{:.text}
+     id | name | grade
+    ====+======+=======
+      1 | Ted  | B
+      2 | Stan | A-
+      3 | Fred | C++
+      4 | Ned  | 5%
+    (4 rows)
 ------
 
 ## Create a Relationship
 
+    CREATE TABLE backpacks(
+      id SERIAL PRIMARY KEY,
+      color TEXT NOT NULL,
+      student_id INT references students(id)
+    );
 ------
 
+# Insert Data
+
+    INSERT INTO backpacks (color, student_id) values('blue', 1);
+    INSERT INTO backpacks (color, student_id) values('red', 2);
+    INSERT INTO backpacks (color, student_id) values('grey', 3);
+    INSERT INTO backpacks (color, student_id) values('green', 4);
+    INSERT INTO backpacks (color, student_id) values('clear', 1);
+------
+
+## View Data
+
+{:.text}
+     id | color | student_id
+    ====+=======+============
+      1 | blue  |          1
+      2 | red   |          2
+      3 | grey  |          3
+      4 | green |          4
+      5 | clear |          1
+    (5 rows)
+------
+
+## Backback colors for a Student
+
+    SELECT color FROM backpacks WHERE student_id = 1;
+
+{:.text}
+     color
+    =======
+     blue
+     clear
+    (2 rows)
+------
+
+## Backpacks for all students
+
+    SELECT s.name, b.color FROM students as s
+      JOIN backpacks as b ON s.id = b.student_id
+      ORDER BY s.name;
+
+{:.text}
+     name | color
+    ======+=======
+     Fred | grey
+     Ned  | green
+     Stan | red
+     Ted  | blue
+     Ted  | clear
+    (5 rows)
+------
 
 ## Quit Postgres
 
@@ -466,6 +533,7 @@ for various
 
 ## Output for create
 
+{:.text}
     (0.1ms)  begin transaction
     SQL (0.4ms)  INSERT INTO "posts"
       ("title", "body", "created_at", "updated_at")
@@ -495,6 +563,7 @@ for various
 
 # [Transactions](https://en.wikipedia.org/wiki/Database_transaction)
 
+{:.text}
     (0.1ms)  begin transaction
     ...
     (0.7ms)  commit transaction
@@ -543,6 +612,7 @@ Either both get updated or neither do.
 
 # Queries
 
+{:.text}
     SQL (0.4ms)  INSERT INTO "posts"
       ("title", "body", "created_at", "updated_at")
       VALUES (?, ?, ?, ?)
@@ -557,7 +627,7 @@ Either both get updated or neither do.
 
 ## Dynamically generated
 
-Active Record analyses the table and
+Active Record analyzes the table and
 
 generates the correct query
 ------
@@ -565,6 +635,7 @@ generates the correct query
 
 # Duration
 
+{:.text}
     SQL (0.4ms)  INSERT INTO "posts" ...
 ------
 
@@ -632,6 +703,7 @@ times of each record
 
 `Post.last`
 
+{:.text}
     SELECT  "posts".* FROM "posts"
       ORDER BY "posts"."id" DESC LIMIT ?  [["LIMIT", 1]]
     => #<Post id: 1,
@@ -646,6 +718,7 @@ times of each record
 
 `Post.count`
 
+{:.text}
     SELECT COUNT(*) FROM "posts"
     => 1
 ------
@@ -655,6 +728,7 @@ times of each record
 
 `Post.destroy_all`
 
+{:.text}
     SELECT "posts".* FROM "posts"
     DELETE FROM "posts" WHERE "posts"."id" = ?  [["id", 1]]
 ------
@@ -708,6 +782,10 @@ Eventually, all the data will be consistent.
 - Basically Available
 - Soft state
 - Eventual consistency
+------
+
+
+# Other Topics
 ------
 
 
@@ -769,6 +847,7 @@ Review DB permissions to reduce risk of accidental
 Removing duplication across tables
 ------
 
+
 ## Normal Forms
 
 - [1NF](https://en.wikipedia.org/wiki/First_normal_form)
@@ -812,6 +891,7 @@ To allow parent-child relationships.
 Changing the database schema as your needs change
 ------
 
+
 # Migrations, cont.
 
 - Migrating the database by hand is tricky.
@@ -821,6 +901,7 @@ Changing the database schema as your needs change
   - PRD has multiple DBs whereas DEV has one local DB.
 ------
 
+
 # Migrations, cont.
 
 - Take databases offline
@@ -829,8 +910,8 @@ Changing the database schema as your needs change
 - Keep databases online
   - Have to make sure old version of app works with new DB schema
   - Might have to make multiple deployments.
-
 ------
+
 
 # Migrations, cont.
 
@@ -841,12 +922,15 @@ For example, to rename a column:
   - Deploy code that deletes the old column
 ------
 
+
 # [Data integrity](https://en.wikipedia.org/wiki/Data_integrity#Databases)
 
 Application-level integrity vs Database-level integrity
 
   - Database can enforce referential integrity (city exists when creating a weather report)
   - Application can enforce higher-level things (Only an admin user can modify this record)
+------
+
 
 # Locks
 
@@ -856,6 +940,7 @@ can lock the table
 
 and prevent reads or writes
 ------
+
 
 # Locks, cont.
 
@@ -867,7 +952,6 @@ To prevent a long table lock
   - This will lock each row for a short time
 - Update the column to not allow null values
   - Since each column already has
-
 ------
 
 
