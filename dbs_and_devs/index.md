@@ -460,6 +460,7 @@ follows the
 
 # Install Ruby
 
+{:.sh}
     brew install rbenv
     rbenv install 2.4.2
     rbenv global 2.4.2
@@ -492,12 +493,27 @@ follows the
 
 # Create Posts
 
+{:.sh}
     rails generate scaffold Post title:string body:text
+------
+
+
+    class CreatePosts < ActiveRecord::Migration[5.1]
+      def change
+        create_table :posts do |t|
+          t.string :title
+          t.text :body
+
+          t.timestamps
+        end
+      end
+    end
 ------
 
 
 # Run db migration
 
+{:.sh}
     rails db:migrate
 
 ------
@@ -505,7 +521,8 @@ follows the
 
 ## Enter Ruby console
 
-`rails console`
+{:.sh}
+    rails console
 ------
 
 
@@ -517,6 +534,7 @@ We can modify SQL data with it
 
 # Create a new post
 
+{:.ruby}
     Post.create title: 'First!', body: 'Viral to the max.'
 ------
 
@@ -733,14 +751,116 @@ times of each record
     DELETE FROM "posts" WHERE "posts"."id" = ?  [["id", 1]]
 ------
 
+
 ## Just a sample
 
 This is not an exhaustive list
 ------
 
+
 # Exit Rails Console
 
 `exit`
+------
+
+
+## Add a Column to Post
+
+{:.sh}
+    rails g migration AddCurrentSongToPosts current_song:string
+
+{:.ruby}
+    class AddCurrentSongToPosts < ActiveRecord::Migration[5.1]
+      def change
+        add_column :posts, :current_song, :string
+      end
+    end
+------
+
+
+Migrations support
+
+## rolling back schema
+------
+
+
+## Create a Relationship
+
+{:.sh}
+    rails g model like post:references author:references
+
+{:.ruby}
+    class CreateLikes < ActiveRecord::Migration[5.1]
+      def change
+        create_table :likes do |t|
+          t.references :post, foreign_key: true
+          t.references :author, foreign_key: true
+
+          t.timestamps
+        end
+      end
+    end
+
+- Adds indexes for `author_id`, `post_id`
+------
+
+
+## Complex Relationship
+
+An author can publish many posts, and
+
+a post can have many authors
+------
+
+
+## Complex Relationship, cont.
+
+{:.sh}
+    rails g model author name:string email:string
+
+{:.ruby}
+    class CreateAuthors < ActiveRecord::Migration[5.1]
+      def change
+        create_table :authors do |t|
+          t.string :name
+          t.string :email
+
+          t.timestamps
+        end
+      end
+    end
+------
+
+
+## Complex Relationship, cont.
+
+{:.sh}
+    rails g migration CreateJoinTableAuthorsPosts author post
+
+{:.ruby}
+    class CreateJoinTableAuthorsPosts < ActiveRecord::Migration[5.1]
+      def change
+        create_join_table :authors, :posts do |t|
+          # t.index [:author_id, :post_id]
+          # t.index [:post_id, :author_id]
+        end
+      end
+    end
+------
+
+
+## Even Complexerer
+
+Sometimes the join tables are more complex
+------
+
+
+- Give the concept a name, like `Publications`
+- Treat it like a model itself
+- Consider needing additional data, like a
+  - `primary_author` boolean attribute
+  - `royalty_earned` money attribute
+- Use Timestamps to know when changes happen
 ------
 
 
@@ -789,12 +909,79 @@ Eventually, all the data will be consistent.
 ------
 
 
-# NoSQL DBs
+### ORMs
 
-- [MongoDB](https://www.mongodb.com/) is a document-based store
-- [Redis](https://redis.io/) is a key-value store
-- [Cassandra](http://cassandra.apache.org/) is a column-based store
-- [Neo4j](https://neo4j.com/) is a graph-based store
+support multiple databases through
+
+### DB Adapters
+___
+The same DSL works for MySQL, Postgres, etc.
+------
+
+
+### ORMS
+
+generate queries on the fly, so
+
+are slower than hard-coded queries
+___
+Dynamically generating the query is slower than having one hardcoded, but it's a tradeoff. Hardcoding a query can make your application more fragile to changes in the future, whereas the dynamic queries will update themselves as things change and the ORM picks up those changes. A hardcoded query might refer to a column that was renamed, for instance.
+------
+
+
+### ORMs
+
+inflate objects with
+
+data from the DB, which
+
+### isn't ideal for bulk work
+___
+Can be slow when you want to quickly loop over a single attribute of all records.
+Especially when the object is complex and has special serialization rules.
+------
+
+
+## Alternate SQL Library
+
+like [sequel](https://github.com/jeremyevans/sequel) for Ruby
+
+### might be more performant
+___
+It does not inflate data the same way.
+Working closer to the metal.
+------
+
+
+## N+1 Query Explosions
+
+ORMS may lazily fetch data, resulting in
+
+1,000+1 queries for
+
+1,000 posts by 1 author
+------
+
+
+# [Primary Key](https://en.wikipedia.org/wiki/Relational_database#Primary_key)
+
+Key (like `id`) that [uniquely](https://en.wikipedia.org/wiki/Unique_key) identifies this record
+
+No two records have the same primary key
+------
+
+
+# [Foreign Key](https://en.wikipedia.org/wiki/Foreign_key)
+
+Key (like `post_id`) that uniquely identifies
+
+some other row in a different table or in this table
+------
+
+
+### Why reference a row in the same table?
+
+To allow parent-child relationships
 ------
 
 
@@ -802,9 +989,9 @@ Eventually, all the data will be consistent.
 
 Can speed up lookups, but
 
-requires extra space on disk and
+require extra space on disk and
 
-slows down writes
+slow down writes
 ___
 Can make looking up a user by their email fast.
 Every change to a users email means updating the index.
@@ -818,27 +1005,26 @@ Every change to a users email means updating the index.
 ## Never trust user input
 
 [SQL injection](https://en.wikipedia.org/wiki/SQL_injection) can cause your DB to be hacked
+
+Some ORMs may sanitize some data by default
 ------
 
 
-Some ORMs sanitize some data by default
+## Responsibility falls on you
 
-## You are responsible
+### to ensure data is sanitized
 
-for ensuring data is
-
-sanitized before entering your system.
+before entering your system
 ------
 
 
 # Permissions
-------
 
-Some users might only need read-only access.
+Some users might only need read-only access
 
 Review DB permissions to reduce risk of accidental
 
-## deletion or modification
+### deletion or modification
 ------
 
 
@@ -857,32 +1043,14 @@ Removing duplication across tables
 ------
 
 
-# Constraints
+# [Constraints](https://en.wikipedia.org/wiki/Data_integrity#Databases)
 
 - primary key
 - foreign key
 - not null
 - unique
-------
-
-
-# Primary Key
-
-The key another entity can use to reference this one
-
-No two records have the same primary key
-------
-
-
-# [Foreign Key](https://en.wikipedia.org/wiki/Foreign_key)
-
-Uniquely identifies a row in another table or in this table
-------
-
-
-### Why reference a row in the same table?
-
-To allow parent-child relationships.
+___
+Helps the DBMS enforce data integrity
 ------
 
 
@@ -957,20 +1125,25 @@ To prevent a long table lock
 
 ## Scaling
 
-- Multiple nodes to handle more requests
-- Master node can do reads and writes
-- Slave nodes can do reads
-- Replication across nodes
-- Partition data across nodes
-- Increases complexity
+- Vertical
+  - Faster CPUs
+  - More Memory
+  - More Disk Space
+  - [Caching](https://en.wikipedia.org/wiki/Database_caching)
+  - [Partitioning](https://en.wikipedia.org/wiki/Partition_(database)) large tables  data across nodes
+- Horizontal - More servers
+  - Load balancing
+  - Create a pool of nodes
+  - Add more nodes to the pool
+  - [Sharding](https://en.wikipedia.org/wiki/Shard_(database_architecture))
 ------
 
 
 ## Fault tolerance
 
-If master node goes down,
+If one node goes down,
 
-another one can still serve requests
+another can still serve requests
 ------
 
 # Recovery
@@ -989,12 +1162,33 @@ to make sure it works!
 ------
 
 
+# NoSQL DBs
 
-# TODO: LEFT OFF HERE!
-
-
-
+- [MongoDB](https://www.mongodb.com/) is a document-based store
+- [Redis](https://redis.io/) is a key-value store
+- [Cassandra](http://cassandra.apache.org/) is a column-based store
+- [Neo4j](https://neo4j.com/) is a graph-based store
 ------
+
+
+## Other topics to consider
+
+- Data Types
+- Views
+- Triggers
+- Full text search
+- Security
+------
+
+
+## Other topics to consider, cont.
+
+- Stored Procedures
+- Reports/Analytics
+- Spatial extensions
+- Self-hosted vs Cloud
+------
+
 
 ## Links
 
@@ -1006,96 +1200,21 @@ to make sure it works!
 - [Fields](https://en.wikipedia.org/wiki/Field_(computer_science))
 - [Active Record pattern](https://en.wikipedia.org/wiki/Active_record_pattern)
 - [Views](https://en.wikipedia.org/wiki/View_(SQL))
+- [Transactions](https://en.wikipedia.org/wiki/Database_transaction)
+- [Commits](https://en.wikipedia.org/wiki/Commit_(data_management))
 ------
+
 
 ## Links, cont.
 
-- [Transactions](https://en.wikipedia.org/wiki/Database_transaction)
-- [Commit](https://en.wikipedia.org/wiki/Commit_(data_management))
 - [Rollback](https://en.wikipedia.org/wiki/Rollback_(data_management)#SQL)
 - [Distributed data store](https://en.wikipedia.org/wiki/Distributed_data_store)
 - [Normalization overview](http://searchsqlserver.techtarget.com/definition/normalization)
-------
-
-
-- Views
-  - A query is stored and then the results are calculated at run-time.
-  - Can represent a subset of a much larger table
-  - Unique key - A column or set of columns which are guaranteed to be unique in the table
-    - https://en.wikipedia.org/wiki/Unique_key
-    - Primary key is the key other entity (row in another table) can use to reference this entity.
-    - A simple table will have a primary key that is an automatically-increasing integer called `id`
-    - No two rows (entities) will have the same `id`
-  - Foreign key
-- Basic Database Design
-- How to work with Databases
-- Software to interact with databases
-  - Rails
-    - DB adapters
-  - ORM
-    - Dynamically reads the tables and their columns and creates SQL queries on the fly
-    - The ORM inflates the data from the DB into an object and its attributes
-    - This can take a decent bit of time for a complex object with a lot of attributes
-    - Some complex or advanced things aren't always possible, so knowing the SQL you need to write can help you get the job done.
-    - Understanding the limits of your tools
-    - Still need to understand what the query you want should look like
-    - Helps you avoid N+1 query explosions
-    - The performance might not be what you need for processing data in bulk
-    - Dynamically generating the query is slower than having one hardcoded, but it's a tradeoff. Hardcoding a query can make your application more fragile to changes in the future, whereas the dynamic queries will update themselves as things change and the ORM picks up those changes. A hardcoded query might refer to a column that was renamed, for instance.
-    - This is where something like Sequel is nice, because it gives you the raw data
-  - It is worth doing things the "hard way" first.
-    - You can learn the basics
-    - Learn what the libraries solve for you
-    - Also learn the limitations of the libraries
-    - Know how to get around the limitations when you need to.
-  - Database migrations at the application level
-- Other
-  - Stored Procedures
-  - Join tables
-  - Triggers
-    - https://en.wikipedia.org/wiki/Database_trigger
-  - Views
-  - Data analytics
-    - Generating reports from the data
-    - Running custom queries to answer questions from clients
-  - Data integrity
-- Scaling
-  - Centralized?
-    - https://en.wikipedia.org/wiki/Centralized_database
-    - Good data integrity
-    - Bottlenecks with high traffic
-  - Distributed (Mongo)
-  - Partitions
-  - Self-hosted vs cloud
-
-
-------
-
-## Database Recap
-
-- ...
-------
-
-
-## Other things to think about
-
-- ...
-------
-
-
-## What's Next?
-
-- Where can you learn more?
-  - [Python ORMs](https://www.pythoncentral.io/sqlalchemy-vs-orms/)
-  - [Khan Academy SQL Basics](https://www.khanacademy.org/computing/computer-programming/sql/sql-basics/v/welcome-to-sql)
-  - [101 things I wish I knew...](https://thomaslarock.com/2015/06/101-things-i-wish-you-knew-about-sql-server/)
-------
-
-
-## Links to Code
-
-- ...
-
+- [Rails ActiveRecord Basics](http://guides.rubyonrails.org/active_record_basics.html)
+- [Use the Index, Luke](http://use-the-index-luke.com/)
+- [Python ORMs](https://www.pythoncentral.io/sqlalchemy-vs-orms/)
+- [Khan Academy SQL Basics](https://www.khanacademy.org/computing/computer-programming/sql/sql-basics/v/welcome-to-sql)
+- [101 things I wish I knew...](https://thomaslarock.com/2015/06/101-things-i-wish-you-knew-about-sql-server/)
 ------
 
 
