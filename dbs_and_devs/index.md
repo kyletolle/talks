@@ -281,27 +281,12 @@ Let's drop into
 ------
 
 
-## Install Postgres
+# Set up Postgres
 
-`brew install postgres`
-------
-
-
-## Start Postgres
-
-`brew services start postgresql`
-------
-
-
-## Create a DB
-
-`createdb dbs_and_devs_talk`
-------
-
-
-## Connect to the DB
-
-`psql dbs_and_devs_talk`
+    brew install postgres
+    brew services start postgresql
+    createdb dbs_and_devs_talk
+    psql dbs_and_devs_talk
 ------
 
 
@@ -325,11 +310,21 @@ Let's drop into
 ------
 
 
-# View Data
+## View Data
 
 `SELECT * FROM students;`
 
 ![Query result](./select_from_students.png)
+------
+
+## Create a Relationship
+
+------
+
+
+## Quit Postgres
+
+`\q`
 ------
 
 
@@ -360,7 +355,6 @@ Plus, learn to
 ------
 
 
-
 # Useful Tools
 
 - [pgAdmin 4](https://www.pgadmin.org/download/pgadmin-4-macos/)
@@ -384,6 +378,8 @@ Maps
 to
 
 ## object instances
+___
+Inflates the DB data into an instantiated class
 ------
 
 
@@ -395,20 +391,524 @@ follows the
 ------
 
 
+# Install Ruby
+
+    brew install rbenv
+    rbenv install 2.4.2
+    rbenv global 2.4.2
+------
+
+
+## Ensure [SQLite3](https://www.sqlite.org/) is installed
+
+`sqlite3 --version`
+------
+
+
+# Install Rails
+
+    gem install rails
+    rails --version
+
+<br />
+
+<small>We expect to see `Rails 5.1.4`</small>
+------
+
+
+# Create Rails app
+
+    rails new blog
+    cd blog
+------
+
+
+# Create Posts
+
+    rails generate scaffold Post title:string body:text
+------
+
+
+# Run db migration
+
+    rails db:migrate
+
+------
+
+
+## Enter Ruby console
+
+`rails console`
+------
+
+
+## Active Record is a DSL
+
+We can modify SQL data with it
+------
+
+
+# Create a new post
+
+    Post.create title: 'First!', body: 'Viral to the max.'
+------
+
+
+The console shows us
+
+## SQL queries
+
+for various
+
+## Active Record methods
+------
+
+
+## Output for create
+
+    (0.1ms)  begin transaction
+    SQL (0.4ms)  INSERT INTO "posts"
+      ("title", "body", "created_at", "updated_at")
+      VALUES (?, ?, ?, ?)
+      [
+        ["title", "First!"],
+        ["body", "Viral to the max."],
+        ["created_at", "2017-11-29 01:37:50.231847"],
+        ["updated_at", "2017-11-29 01:37:50.231847"]
+      ]
+    (0.7ms)  commit transaction
+    => #<Post id: 1, title: "First!",
+         body: "Viral to the max.",
+         created_at: "2017-11-29 01:37:50",
+         updated_at: "2017-11-29 01:37:50">
+------
+
+
+## Let's break it down
+
+- Transactions
+- Queries
+- Duration
+- Conventions
+------
+
+
+# [Transactions](https://en.wikipedia.org/wiki/Database_transaction)
+
+    (0.1ms)  begin transaction
+    ...
+    (0.7ms)  commit transaction
+------
+
+
+Multiple queries either
+
+## all happen
+
+or
+
+## none happen
+------
+
+
+An error in a query causes a
+
+## Rollback
+------
+
+
+Provides protection from
+
+## Errors
+
+causing
+
+## Inconsistent Data
+------
+
+
+Important when
+
+## modifying many records
+
+in
+
+## one logical change
+___
+Like transferring money from one bank account to another.
+One must be credited and the other must be debited at the same time.
+Either both get updated or neither do.
+------
+
+
+# Queries
+
+    SQL (0.4ms)  INSERT INTO "posts"
+      ("title", "body", "created_at", "updated_at")
+      VALUES (?, ?, ?, ?)
+      [
+        ["title", "First!"],
+        ["body", "Viral to the max."],
+        ["created_at", "2017-11-29 01:37:50.231847"],
+        ["updated_at", "2017-11-29 01:37:50.231847"]
+      ]
+------
+
+
+## Dynamically generated
+
+Active Record analyses the table and
+
+generates the correct query
+------
+
+
+# Duration
+
+    SQL (0.4ms)  INSERT INTO "posts" ...
+------
+
+
+Active Record measures
+
+## how long
+
+each query takes to run
+------
+
+
+Can help
+
+## profile queries
+
+and find slow ones
+------
+
+
+# Conventions
+------
+
+
+## Naming
+
+  Table name (`posts`) is pluralized
+
+  Class name (`Post`) is singular
+------
+
+Handles
+
+## complex cases
+
+like
+
+### `people` & `Person`
+------
+
+
+## Timestamps
+------
+
+Notice the
+
+### `updated_at` & `created_at`
+
+columns?
+------
+
+
+Active Record automatically tracks
+
+## creation & modification
+
+times of each record
+------
+
+
+# Other Examples
+------
+
+# Viewing
+
+`Post.last`
+
+    SELECT  "posts".* FROM "posts"
+      ORDER BY "posts"."id" DESC LIMIT ?  [["LIMIT", 1]]
+    => #<Post id: 1,
+              title: "First!",
+              body: "Viral to the max.",
+              created_at: "2017-11-29 01:37:50",
+              updated_at: "2017-11-29 01:37:50">
+------
+
+
+# Counting
+
+`Post.count`
+
+    SELECT COUNT(*) FROM "posts"
+    => 1
+------
+
+
+# Destroying
+
+`Post.destroy_all`
+
+    SELECT "posts".* FROM "posts"
+    DELETE FROM "posts" WHERE "posts"."id" = ?  [["id", 1]]
+------
+
+## Just a sample
+
+This is not an exhaustive list
+------
+
+# Exit Rails Console
+
+`exit`
+------
+
+
+Quick detour into
+
+## Database Theory
+------
+
+
+# [ACID](https://en.wikipedia.org/wiki/ACID)
+
+A single DB can provide
+
+- Atomicity
+- Consistency
+- Isolation
+- Durability
+------
+
+
+# [CAP Theorem](https://en.wikipedia.org/wiki/CAP_theorem)
+
+In the event of a network failure,
+
+a distributed DB must choose between
+
+- consistency
+- availability
+------
+
+
+# [BASE](https://en.wikipedia.org/wiki/Eventual_consistency)
+
+Some distributed DBs prioritize availability.
+
+Eventually, all the data will be consistent.
+
+
+- Basically Available
+- Soft state
+- Eventual consistency
+------
+
+
+# NoSQL DBs
+
+- [MongoDB](https://www.mongodb.com/) is a document-based store
+- [Redis](https://redis.io/) is a key-value store
+- [Cassandra](http://cassandra.apache.org/) is a column-based store
+- [Neo4j](https://neo4j.com/) is a graph-based store
+------
+
+
+# Indexes
+
+Can speed up lookups, but
+
+requires extra space on disk and
+
+slows down writes
+___
+Can make looking up a user by their email fast.
+Every change to a users email means updating the index.
+------
+
+
+# Sanitization
+------
+
+
+## Never trust user input
+
+[SQL injection](https://en.wikipedia.org/wiki/SQL_injection) can cause your DB to be hacked
+------
+
+
+Some ORMs sanitize some data by default
+
+## You are responsible
+
+for ensuring data is
+
+sanitized before entering your system.
+------
+
+
+# Permissions
+------
+
+Some users might only need read-only access.
+
+Review DB permissions to reduce risk of accidental
+
+## deletion or modification
+------
+
+
+# [Normalization](https://en.wikipedia.org/wiki/Database_normalization)
+
+Removing duplication across tables
+------
+
+## Normal Forms
+
+- [1NF](https://en.wikipedia.org/wiki/First_normal_form)
+- [2NF](https://en.wikipedia.org/wiki/Second_normal_form)
+- [3NF](https://en.wikipedia.org/wiki/Third_normal_form)
+  - "Nothing but the key"
+------
+
+
+# Constraints
+
+- primary key
+- foreign key
+- not null
+- unique
+------
+
+
+# Primary Key
+
+The key another entity can use to reference this one
+
+No two records have the same primary key
+------
+
+
+# [Foreign Key](https://en.wikipedia.org/wiki/Foreign_key)
+
+Uniquely identifies a row in another table or in this table
+------
+
+
+### Why reference a row in the same table?
+
+To allow parent-child relationships.
+------
+
+
+# Migrations
+
+Changing the database schema as your needs change
+------
+
+# Migrations, cont.
+
+- Migrating the database by hand is tricky.
+- Need to be consistent.
+- Need to do it across many machines (many developers)
+- Need to do it differently in different environments
+  - PRD has multiple DBs whereas DEV has one local DB.
+------
+
+# Migrations, cont.
+
+- Take databases offline
+  - Can make changes that would break your application
+
+- Keep databases online
+  - Have to make sure old version of app works with new DB schema
+  - Might have to make multiple deployments.
+
+------
+
+# Migrations, cont.
+
+For example, to rename a column:
+
+  - Deploy code that duplicates a column with a new name
+  - Deploy code that references the new column
+  - Deploy code that deletes the old column
+------
+
+# [Data integrity](https://en.wikipedia.org/wiki/Data_integrity#Databases)
+
+Application-level integrity vs Database-level integrity
+
+  - Database can enforce referential integrity (city exists when creating a weather report)
+  - Application can enforce higher-level things (Only an admin user can modify this record)
+
+# Locks
+
+Adding a non null column to a large table
+
+can lock the table
+
+and prevent reads or writes
+------
+
+# Locks, cont.
+
+To prevent a long table lock
+
+- Add a column that allows null values
+  - Table is only locked for a short time
+- Update each row to have a default value
+  - This will lock each row for a short time
+- Update the column to not allow null values
+  - Since each column already has
+
+------
+
+
+## Scaling
+
+- Multiple nodes to handle more requests
+- Master node can do reads and writes
+- Slave nodes can do reads
+- Replication across nodes
+- Partition data across nodes
+- Increases complexity
+------
+
+
+## Fault tolerance
+
+If master node goes down,
+
+another one can still serve requests
+------
+
+# Recovery
+
+Make regular backups of databases
+------
+
+
+# Recovery, cont.
+
+Have a restore process
+
+### Try out the restore process
+
+to make sure it works!
+------
 
 
 
 # TODO: LEFT OFF HERE!
 
 
-
-
-------
-Web applications typically start using a SQL database
-
-May migrate to something more complex as they grow
-
--------
 
 ------
 
@@ -422,106 +922,33 @@ May migrate to something more complex as they grow
 - [Fields](https://en.wikipedia.org/wiki/Field_(computer_science))
 - [Active Record pattern](https://en.wikipedia.org/wiki/Active_record_pattern)
 - [Views](https://en.wikipedia.org/wiki/View_(SQL))
-
 ------
 
-- Databases
-  - Relational
-    - Schemas
-      - Indexes
-      - Relationships
-      - Views
-        - A query is stored and then the results are calculated at run-time.
-        - Can represent a subset of a much larger table
-    - Queries
-  - Database management system
-    - https://en.wikipedia.org/wiki/Database
-    - > A general-purpose DBMS allows the definition, creation, querying, update, and administration of databases.
-  - Relational DBMS
-    - https://en.wikipedia.org/wiki/Relational_database_management_system
----
-  - CAP Theorem
-    - https://en.wikipedia.org/wiki/CAP_theorem
-    - When you use network partitioning, you must choose between consistency and availability.
-    - https://en.wikipedia.org/wiki/Distributed_data_store
-    - Information is stored on more than one node, using replication
-  - ACID (Atomicity, Consistency, Isolation, Durability)
-    - https://en.wikipedia.org/wiki/ACID
-  - BASE (Basically Available, Soft state, Eventual consistency)
-    - https://en.wikipedia.org/wiki/Eventual_consistency
-  - CRUD
-    - Create, Read, Update, Delete
-  - Transactions
-    - https://en.wikipedia.org/wiki/Database_transaction
-    - https://en.wikipedia.org/wiki/Commit_(data_management)
-    - Example of a transaction
-    - `BEGIN WORK` - Marks the beginning of a transaction
-    - Issue one or more SQL commands
-      - Issue `UPDATE` command to modify a row
-      - Issue `UPDATE` command to modify another row
-    - `COMMIT` - Marks the success and the end of a transaction
-  - Rollbacks
-    - If an error happens in the middle of one of those SQL commands, a `ROLLBACK` is issues, which reverts all those changes.
-    - In a transaction, either all the commands pass and are applied or they all fail and nothing happens.
-    - https://en.wikipedia.org/wiki/Rollback_(data_management)#SQL
-    - `BEGIN WORK` - Marks the beginning of a transaction
-    - Issue one or more SQL commands
-      - Issue `UPDATE` command to modify a row
-      - Issue `UPDATE` command to modify another row - But this one fails
-    - `ROLLBACK` - Marks the failure and the end of the transaction, reverts the changes
-  - Savepoints
-    - Allow you to roll back a portion of a transaction.
-    - Allow implementing complex error recovery in database application
-  - Constraints
+## Links, cont.
+
+- [Transactions](https://en.wikipedia.org/wiki/Database_transaction)
+- [Commit](https://en.wikipedia.org/wiki/Commit_(data_management))
+- [Rollback](https://en.wikipedia.org/wiki/Rollback_(data_management)#SQL)
+- [Distributed data store](https://en.wikipedia.org/wiki/Distributed_data_store)
+- [Normalization overview](http://searchsqlserver.techtarget.com/definition/normalization)
+------
+
+
+- Views
+  - A query is stored and then the results are calculated at run-time.
+  - Can represent a subset of a much larger table
   - Unique key - A column or set of columns which are guaranteed to be unique in the table
     - https://en.wikipedia.org/wiki/Unique_key
     - Primary key is the key other entity (row in another table) can use to reference this entity.
     - A simple table will have a primary key that is an automatically-increasing integer called `id`
     - No two rows (entities) will have the same `id`
   - Foreign key
-    - https://en.wikipedia.org/wiki/Foreign_key
-    - Uniquely identifies a row in another table or in this table
-    - Why might you want to reference another row in the same table?
-    - To allow parent-child relationships.
-  - Types of databases
-    - NoSQL (Mongo)
-      - https://en.wikipedia.org/wiki/NoSQL
-    - SQL (MySQL)
-      - https://en.wikipedia.org/wiki/SQL
-    - Key-Value (Redis)
-    - Centralized?
-      - https://en.wikipedia.org/wiki/Centralized_database
-      - Good data integrity
-      - Bottlenecks with high traffic
-    - Distributed (Mongo)
-    - https://en.wikipedia.org/wiki/Centralized_database#Centralised_databases_vs._Distributed_databases
-    - Peer to Peer (BitTorrent)
-    - Sqlite
-    - Flat-file
-      - https://en.wikipedia.org/wiki/Flat_file_database
-      - CSV is an example
-      - Plain text
-      - Binary
-  - Brands of SQL DBs
-    - Oracle, MySQL, Postgres
 - Basic Database Design
 - How to work with Databases
-- It's helpful to do things by hand first.
-- Then you understand the benefits that software tools give you.
 - Software to interact with databases
   - Rails
-    - Rails can create DBs for you when creating a new project.
-    - Can customize things
     - DB adapters
   - ORM
-    - Object Relational Mapping.
-    - Rails follows the Active record pattern
-    - > An object that wraps a row in a database table or view, encapsulates the database access, and adds domain logic on that data.
-    - Martin Fowler
-    - In fact, the library that handles this stuff is called `ActiveRecord`
-    - http://guides.rubyonrails.org/active_record_basics.html
-    - Abstract the SQL behind a domain-specific language (DSL)
-    - Make working with the database easier
     - Dynamically reads the tables and their columns and creates SQL queries on the fly
     - The ORM inflates the data from the DB into an object and its attributes
     - This can take a decent bit of time for a complex object with a lot of attributes
@@ -531,104 +958,37 @@ May migrate to something more complex as they grow
     - Helps you avoid N+1 query explosions
     - The performance might not be what you need for processing data in bulk
     - Dynamically generating the query is slower than having one hardcoded, but it's a tradeoff. Hardcoding a query can make your application more fragile to changes in the future, whereas the dynamic queries will update themselves as things change and the ORM picks up those changes. A hardcoded query might refer to a column that was renamed, for instance.
-    - This is qhere something like Sequel is nice, because it gives you the raw data
+    - This is where something like Sequel is nice, because it gives you the raw data
   - It is worth doing things the "hard way" first.
-    - Without the ORM
-    - Without Hadoop
-    - Without the ML library
     - You can learn the basics
     - Learn what the libraries solve for you
     - Also learn the limitations of the libraries
     - Know how to get around the limitations when you need to.
-  - Other gems like Sequel
   - Database migrations at the application level
-    - Migrating the database is tricky.
-    - Need to be consistent.
-    - Need to do it across many machines (many developers)
-    - Need to do it differently in different environments
-      - PRD has multiple DBs whereas DEV has one local DB.
-- Your Data
-  - Indexes
-    - Pros and Cons
-    - Take up space
-    - Increase write times
-    - Make reads fast
-  - Duplication of data
-  - Data integrity
-    - https://en.wikipedia.org/wiki/Data_integrity#Databases
-  - Application-level integrity vs Database-level integrity
-  - Permissions on tables
-  - Normalizing
-    - http://searchsqlserver.techtarget.com/definition/normalization
-    - https://en.wikipedia.org/wiki/Database_normalization
-    - https://en.wikipedia.org/wiki/Boyce%E2%80%93Codd_normal_form
-- Security
-  - Data sanitization
-  - Some is by default, but other things the dev must keep in mind, especially when creating queries on their own.
-  - SQL injection
-  - How ORMs can help with this
 - Other
   - Stored Procedures
-  - Putting created_at and updated_at columns on a table.
-    - This can be automatically managed by Rails
-    - Helps you know when things were updated last, which is really helpful when diagnosing bugs
   - Join tables
-  - Database locks
-    - Row level
-    - Table level
-  - Adding colums
-    - Adding a column to a large table can lock the entire table for a long time
-    - This can cause timeouts in an application
-    - Multi-step migrations can help
-    - Add a column that is allowed to be null.
-    - The table-lock is over quickly
-    - Then go through and populate all the rows in the table.
-    - Row locks help keep the table from being unresponsive and are released often
-    - Then update the table to not allow null values.
   - Triggers
     - https://en.wikipedia.org/wiki/Database_trigger
   - Views
-  - Data anlytics
+  - Data analytics
     - Generating reports from the data
     - Running custom queries to answer questions from clients
+  - Data integrity
 - Scaling
-  - Nodes
-  - Replication
-  - Master/Slave
+  - Centralized?
+    - https://en.wikipedia.org/wiki/Centralized_database
+    - Good data integrity
+    - Bottlenecks with high traffic
+  - Distributed (Mongo)
   - Partitions
-  - Fault tolerance
-  - Backups
   - Self-hosted vs cloud
 
 
 ------
 
-## So I'm here
-
-to talk about databases
-------
-
-
-## But first
-
-we need some background
-------
-
-
-## Let's start with
-
-what we know
-------
-
-
-------
-
-
 ## Database Recap
 
-- ...
-- ...
-- ...
 - ...
 ------
 
@@ -636,14 +996,15 @@ what we know
 ## Other things to think about
 
 - ...
-- ...
 ------
 
 
 ## What's Next?
 
 - Where can you learn more?
+  - [Python ORMs](https://www.pythoncentral.io/sqlalchemy-vs-orms/)
   - [Khan Academy SQL Basics](https://www.khanacademy.org/computing/computer-programming/sql/sql-basics/v/welcome-to-sql)
+  - [101 things I wish I knew...](https://thomaslarock.com/2015/06/101-things-i-wish-you-knew-about-sql-server/)
 ------
 
 
